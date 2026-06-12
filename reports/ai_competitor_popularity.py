@@ -74,3 +74,57 @@ fig.text(0.01, 0.01,
 plt.tight_layout(rect=(0, 0.04, 1, 1))
 plt.savefig("reports/ai_competitor_popularity.png", dpi=150)
 print("Saved chart to reports/ai_competitor_popularity.png")
+
+
+# ---------------------------------------------------------------------------
+# Second chart: indexed usage growth (relative scaling, not absolute share)
+#
+# Approximate active-user / web-visit figures at the same anchor dates,
+# aggregated from public reports (OpenAI, Anthropic, Google, xAI
+# disclosures; Similarweb-based traffic estimates). Each series is
+# normalized to 100 at its first available data point so the chart shows
+# *relative growth multiples* rather than absolute scale - this is what
+# makes Claude's and Grok's recent growth look dramatic even though their
+# absolute user bases remain much smaller than ChatGPT's or Gemini's.
+# ---------------------------------------------------------------------------
+
+usage = {
+    # ChatGPT weekly active users (millions)
+    "ChatGPT":  [180, 250, 300, 400, 700, 800, 850, 900],
+    # Gemini monthly active users (millions)
+    "Gemini":   [100, 150, 250, 350, 450, 550, 650, 750],
+    # Claude web visits (millions/month) - small base, recent surge
+    "Claude":   [20, 30, 50, 70, 90, 120, 203, 824],
+    # Microsoft Copilot monthly active users (millions) - roughly flat/slow
+    "Copilot":  [100, 110, 120, 130, 140, 150, 155, 160],
+    # Grok monthly active users (millions) - near zero, explosive growth
+    "Grok":     [0.02, 0.03, 0.0448, 1.9, 17.6, 35, 50, 64],
+}
+
+fig2, ax2 = plt.subplots(figsize=(11, 6.5))
+
+for name, values in usage.items():
+    base = values[0]
+    indexed = [v / base * 100 for v in values]
+    ax2.plot(dates, indexed, marker="o", linewidth=2.5, label=name, color=colors[name])
+
+ax2.set_title("Relative Growth in AI Assistant Usage\n(Indexed to 100 at Mid-2024, Log Scale)", fontsize=14, fontweight="bold")
+ax2.set_ylabel("Usage Index (first data point = 100)")
+ax2.set_xlabel("Date")
+ax2.set_yscale("log")
+ax2.xaxis.set_major_formatter(mdates.DateFormatter("%b %Y"))
+ax2.xaxis.set_major_locator(mdates.MonthLocator(interval=3))
+plt.setp(ax2.get_xticklabels(), rotation=45, ha="right")
+ax2.grid(True, which="both", linestyle="--", alpha=0.4)
+ax2.legend(loc="upper left", fontsize=10)
+
+fig2.text(0.01, 0.01,
+          "Indexed to 100 at each company's first available data point (mid-2024); shows relative growth, not\n"
+          "absolute scale. Claude and Grok show the steepest relative growth off small bases (e.g. Claude web\n"
+          "visits ~203M to 824M/month, Jan-Apr 2026), while ChatGPT's growth is large in absolute users (180M to\n"
+          "900M weekly) but smaller as a growth multiple. Figures are approximate, aggregated estimates.",
+          fontsize=7, color="gray")
+
+plt.tight_layout(rect=(0, 0.08, 1, 1))
+plt.savefig("reports/ai_competitor_growth_rate.png", dpi=150)
+print("Saved chart to reports/ai_competitor_growth_rate.png")
