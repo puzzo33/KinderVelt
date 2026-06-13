@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Donate — Support Free Therapy for Ukrainian Children | Kinder Velt USA</title>
+  <meta name="description" content="Your donation funds free trauma therapy for Ukrainian children. 100% goes directly to programs. Tax-deductible 501(c)(3)." />
+  <link rel="stylesheet" href="assets/css/style.css" />
+</head>
+<body class="bg-white text-brand-navy antialiased">
+
+  <!-- Header -->
+  <header id="site-header" class="sticky top-0 z-50 bg-white/90 backdrop-blur shadow-sm transition-shadow">
+    <div class="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 sm:px-6 lg:px-8">
+      <a href="index.html" class="flex items-center gap-2">
+        <svg width="36" height="36" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <circle cx="24" cy="24" r="24" fill="#1E5FA8"/>
+          <path d="M24 35c6-4.5 11-9.6 11-15.6 0-4.1-3.2-7.4-7.1-7.4-2 0-3.9 1-4.9 2.7C22 12 20.1 11 18.1 11 14.2 11 11 14.3 11 18.4 11 24.4 18 29.5 24 35z" fill="#FFC93C"/>
+        </svg>
+        <span class="text-lg font-bold tracking-tight">Kinder Velt <span class="text-brand-blue">USA</span></span>
+      </a>
+
+      <nav class="hidden items-center gap-8 md:flex">
+        <a href="index.html#programs" class="nav-link">Programs</a>
+        <a href="index.html#impact" class="nav-link">Impact</a>
+        <a href="index.html#about" class="nav-link">About</a>
+        <a href="donate.html" class="btn-primary !px-5 !py-2.5 text-sm">Donate Now</a>
+      </nav>
+
+      <button id="menu-toggle" class="flex items-center justify-center rounded-md p-2 text-brand-navy md:hidden" aria-label="Toggle menu" aria-expanded="false">
+        <svg id="icon-menu" class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+        <svg id="icon-close" class="hidden h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+      </button>
+    </div>
+
+    <!-- Mobile menu -->
+    <div id="mobile-menu" class="hidden border-t border-gray-100 bg-white md:hidden">
+      <nav class="flex flex-col gap-1 px-4 py-3">
+        <a href="index.html#programs" class="rounded-md px-3 py-2 text-base font-medium text-brand-navy hover:bg-gray-50">Programs</a>
+        <a href="index.html#impact" class="rounded-md px-3 py-2 text-base font-medium text-brand-navy hover:bg-gray-50">Impact</a>
+        <a href="index.html#about" class="rounded-md px-3 py-2 text-base font-medium text-brand-navy hover:bg-gray-50">About</a>
+        <a href="donate.html" class="btn-primary mt-2 w-full">Donate Now</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="bg-gradient-to-br from-brand-blue to-brand-sky text-white">
+    <div class="mx-auto max-w-4xl px-4 py-14 text-center sm:px-6 sm:py-20 lg:px-8">
+      <p class="mb-3 inline-flex items-center rounded-full bg-white/15 px-4 py-1 text-sm font-semibold">
+        Tax-deductible • 501(c)(3) Nonprofit
+      </p>
+      <h1 class="text-4xl font-extrabold leading-tight sm:text-5xl">Support Free Therapy for Ukrainian Children</h1>
+      <p class="mt-4 text-lg text-white/90">
+        100% of your donation goes directly to art therapy, fairy-tale therapy, and
+        animal-assisted programs in our five centers across Ukraine.
+      </p>
+    </div>
+  </section>
+
+  <!-- Campaign progress -->
+  <section class="border-b border-gray-100 bg-gray-50">
+    <div class="mx-auto max-w-4xl px-4 py-10 sm:px-6 lg:px-8">
+      <div class="rounded-2xl bg-white p-6 shadow-sm sm:p-8">
+        <div class="flex flex-wrap items-baseline justify-between gap-2">
+          <h2 class="text-xl font-bold">💙 Help Kinder Velt Continue Free PTSD Care</h2>
+          <span class="text-sm font-semibold text-brand-blue">$32,400 of $50,000 raised</span>
+        </div>
+        <div class="mt-4 h-4 w-full overflow-hidden rounded-full bg-gray-100">
+          <div class="h-4 rounded-full bg-gradient-to-r from-brand-blue to-brand-sky" style="width: 65%"></div>
+        </div>
+        <p class="mt-3 text-sm text-brand-navy/60">
+          Help us reach our goal and keep therapy free for every child who needs it.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Donation form -->
+  <section class="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
+    <div class="grid gap-12 lg:grid-cols-2">
+
+      <!-- Donation card -->
+      <div class="order-1 rounded-2xl border border-gray-100 p-6 shadow-md sm:p-8">
+        <h2 class="text-2xl font-bold">Make a Donation</h2>
+
+        <!-- One-time / Monthly toggle -->
+        <div class="mt-6 inline-flex w-full rounded-full bg-gray-100 p-1" role="tablist">
+          <button type="button" id="tab-once" class="tab-btn flex-1 rounded-full px-4 py-2 text-sm font-semibold transition" data-tab="once" aria-selected="true">One-Time</button>
+          <button type="button" id="tab-monthly" class="tab-btn flex-1 rounded-full px-4 py-2 text-sm font-semibold transition" data-tab="monthly" aria-selected="false">Monthly</button>
+        </div>
+
+        <!-- Amount selection -->
+        <div class="mt-6 grid grid-cols-2 gap-3 sm:grid-cols-4">
+          <button type="button" class="amount-btn rounded-xl border-2 border-gray-200 py-3 text-center font-bold transition" data-amount="25">$25</button>
+          <button type="button" class="amount-btn rounded-xl border-2 border-gray-200 py-3 text-center font-bold transition" data-amount="50">$50</button>
+          <button type="button" class="amount-btn rounded-xl border-2 border-gray-200 py-3 text-center font-bold transition" data-amount="100">$100</button>
+          <button type="button" class="amount-btn rounded-xl border-2 border-gray-200 py-3 text-center font-bold transition" data-amount="custom">Other</button>
+        </div>
+
+        <label for="custom-amount" class="mt-4 block text-sm font-medium text-brand-navy/70">Custom amount (USD)</label>
+        <div class="mt-1 flex items-center rounded-xl border-2 border-gray-200 px-4 py-2 focus-within:border-brand-blue">
+          <span class="mr-1 text-lg font-bold text-brand-navy/50">$</span>
+          <input type="number" id="custom-amount" min="1" placeholder="0" class="w-full border-0 p-0 text-lg font-bold focus:ring-0" />
+        </div>
+
+        <p id="impact-note" class="mt-4 rounded-xl bg-brand-blue/5 p-4 text-sm text-brand-navy/70">
+          Select an amount to see your impact.
+        </p>
+
+        <a id="donate-cta" href="#" class="btn-primary mt-6 block w-full text-center text-base">
+          Donate $25 Now
+        </a>
+
+        <p class="mt-4 text-center text-xs text-brand-navy/50">
+          Secure checkout • Tax-deductible • Receipt emailed instantly
+        </p>
+      </div>
+
+      <!-- Where your money goes / trust -->
+      <div class="order-2 flex flex-col gap-8">
+        <div>
+          <h2 class="text-2xl font-bold">Where Your Money Goes</h2>
+          <ul class="mt-4 space-y-4">
+            <li class="flex items-start gap-3">
+              <span class="mt-1 flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full bg-brand-blue/10 text-brand-blue">
+                <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+              </span>
+              <span class="text-brand-navy/70"><strong class="text-brand-navy">$25</strong> provides one art therapy session for a child</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="mt-1 flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full bg-brand-blue/10 text-brand-blue">
+                <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+              </span>
+              <span class="text-brand-navy/70"><strong class="text-brand-navy">$50</strong> provides a Hibuki therapy doll for a child in need</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="mt-1 flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full bg-brand-blue/10 text-brand-blue">
+                <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+              </span>
+              <span class="text-brand-navy/70"><strong class="text-brand-navy">$100</strong> covers a week of group sensory play sessions</span>
+            </li>
+          </ul>
+        </div>
+
+        <div class="rounded-2xl border border-gray-100 p-6">
+          <h3 class="text-lg font-bold">Why Donors Trust Us</h3>
+          <ul class="mt-3 space-y-2 text-sm text-brand-navy/70">
+            <li>✓ Registered 501(c)(3) — EIN 99-5139258</li>
+            <li>✓ 100% of donations go directly to programs</li>
+            <li>✓ Featured in American Forbes</li>
+            <li>✓ Operating 5 centers across Ukraine since 2024</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Corporate & Group Support -->
+  <section class="bg-gray-50 py-16">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="grid items-center gap-10 lg:grid-cols-2">
+        <div>
+          <h2 class="section-title">Corporate &amp; Group Support</h2>
+          <p class="mt-4 text-lg text-brand-navy/70">
+            Companies, schools, and community groups can fund a specific program, sponsor
+            an event, or run a peer-to-peer fundraiser. Many employers also match employee
+            donations — ask your HR team about matching gift programs.
+          </p>
+          <div class="mt-6 flex flex-wrap gap-4">
+            <a href="mailto:donate@kinderveltusa.org" class="btn-outline">Contact Us About Partnerships</a>
+          </div>
+        </div>
+        <div class="grid grid-cols-1 gap-4 sm:grid-cols-3">
+          <div class="rounded-2xl border border-gray-100 bg-white p-6 text-center shadow-sm">
+            <p class="text-3xl font-bold text-brand-blue">🏢</p>
+            <h3 class="mt-2 font-bold">Sponsor a Program</h3>
+            <p class="mt-1 text-sm text-brand-navy/60">Fund a full therapy track for a center</p>
+          </div>
+          <div class="rounded-2xl border border-gray-100 bg-white p-6 text-center shadow-sm">
+            <p class="text-3xl font-bold text-brand-blue">🎉</p>
+            <h3 class="mt-2 font-bold">Event Partnership</h3>
+            <p class="mt-1 text-sm text-brand-navy/60">Co-host a fundraising event</p>
+          </div>
+          <div class="rounded-2xl border border-gray-100 bg-white p-6 text-center shadow-sm">
+            <p class="text-3xl font-bold text-brand-blue">🤝</p>
+            <h3 class="mt-2 font-bold">Matching Gifts</h3>
+            <p class="mt-1 text-sm text-brand-navy/60">Double your impact through your employer</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-brand-navy text-white">
+    <div class="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
+      <div class="grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
+        <div>
+          <span class="text-lg font-bold">Kinder Velt <span class="text-brand-yellow">USA</span></span>
+          <p class="mt-3 text-sm text-white/70">
+            Friends of Kinder Velt USA Inc. is a 501(c)(3) nonprofit supporting children
+            affected by war-related trauma.
+          </p>
+        </div>
+        <div>
+          <h3 class="text-sm font-semibold uppercase tracking-wider text-white/60">Contact</h3>
+          <ul class="mt-3 space-y-2 text-sm text-white/80">
+            <li>
+              <a href="mailto:donate@kinderveltusa.org" class="hover:text-brand-yellow">donate@kinderveltusa.org</a>
+            </li>
+            <li>
+              <a href="tel:+17189168742" class="hover:text-brand-yellow">+1 (718) 916-8742</a>
+            </li>
+          </ul>
+        </div>
+        <div>
+          <h3 class="text-sm font-semibold uppercase tracking-wider text-white/60">Quick Links</h3>
+          <ul class="mt-3 space-y-2 text-sm text-white/80">
+            <li><a href="index.html#programs" class="hover:text-brand-yellow">Programs</a></li>
+            <li><a href="index.html#impact" class="hover:text-brand-yellow">Impact</a></li>
+            <li><a href="donate.html" class="hover:text-brand-yellow">Donate</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3 class="text-sm font-semibold uppercase tracking-wider text-white/60">Follow Us</h3>
+          <div class="mt-3 flex gap-3">
+            <a href="#" aria-label="Facebook" class="flex h-9 w-9 items-center justify-center rounded-full bg-white/10 transition hover:bg-brand-yellow hover:text-brand-navy">
+              <svg class="h-4 w-4" fill="currentColor" viewBox="0 0 24 24"><path d="M22 12a10 10 0 10-11.5 9.9v-7H8v-2.9h2.5V9.8c0-2.5 1.5-3.9 3.8-3.9 1.1 0 2.2.2 2.2.2v2.5h-1.3c-1.2 0-1.6.8-1.6 1.6v1.9H17l-.4 2.9h-2.4v7A10 10 0 0022 12z"/></svg>
+            </a>
+            <a href="#" aria-label="Instagram" class="flex h-9 w-9 items-center justify-center rounded-full bg-white/10 transition hover:bg-brand-yellow hover:text-brand-navy">
+              <svg class="h-4 w-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.2c3.2 0 3.6 0 4.8.1 1.2.1 2 .2 2.8.5.7.3 1.3.7 1.9 1.3.6.6 1 1.2 1.3 1.9.3.8.5 1.6.5 2.8.1 1.2.1 1.6.1 4.8s0 3.6-.1 4.8c-.1 1.2-.2 2-.5 2.8-.3.7-.7 1.3-1.3 1.9-.6.6-1.2 1-1.9 1.3-.8.3-1.6.5-2.8.5-1.2.1-1.6.1-4.8.1s-3.6 0-4.8-.1c-1.2-.1-2-.2-2.8-.5-.7-.3-1.3-.7-1.9-1.3-.6-.6-1-1.2-1.3-1.9-.3-.8-.5-1.6-.5-2.8C2.2 15.6 2.2 15.2 2.2 12s0-3.6.1-4.8c.1-1.2.2-2 .5-2.8.3-.7.7-1.3 1.3-1.9.6-.6 1.2-1 1.9-1.3.8-.3 1.6-.5 2.8-.5C8.4 2.2 8.8 2.2 12 2.2zm0 1.8c-3.1 0-3.5 0-4.7.1-1 0-1.6.2-2 .4-.5.2-.9.4-1.2.8-.4.3-.6.7-.8 1.2-.2.4-.3 1-.4 2-.1 1.2-.1 1.6-.1 4.7s0 3.5.1 4.7c0 1 .2 1.6.4 2 .2.5.4.9.8 1.2.3.4.7.6 1.2.8.4.2 1 .3 2 .4 1.2.1 1.6.1 4.7.1s3.5 0 4.7-.1c1 0 1.6-.2 2-.4.5-.2.9-.4 1.2-.8.4-.3.6-.7.8-1.2.2-.4.3-1 .4-2 .1-1.2.1-1.6.1-4.7s0-3.5-.1-4.7c0-1-.2-1.6-.4-2-.2-.5-.4-.9-.8-1.2-.3-.4-.7-.6-1.2-.8-.4-.2-1-.3-2-.4-1.2-.1-1.6-.1-4.7-.1zM12 7a5 5 0 110 10 5 5 0 010-10zm0 1.8a3.2 3.2 0 100 6.4 3.2 3.2 0 000-6.4zm5.7-3.4a1.2 1.2 0 110 2.4 1.2 1.2 0 010-2.4z"/></svg>
+            </a>
+            <a href="#" aria-label="LinkedIn" class="flex h-9 w-9 items-center justify-center rounded-full bg-white/10 transition hover:bg-brand-yellow hover:text-brand-navy">
+              <svg class="h-4 w-4" fill="currentColor" viewBox="0 0 24 24"><path d="M20.4 20.4h-3.5v-5.5c0-1.3 0-3-1.8-3s-2.1 1.4-2.1 2.9v5.6H9.5V9h3.4v1.6h.1c.5-.9 1.6-1.8 3.3-1.8 3.5 0 4.1 2.3 4.1 5.3v6.3zM5.7 7.4A2 2 0 113.7 5.4a2 2 0 012 2zM7.5 20.4H3.9V9h3.6v11.4z"/></svg>
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="mt-10 border-t border-white/10 pt-6 text-center text-sm text-white/50">
+        &copy; 2026 Friends of Kinder Velt USA Inc. All rights reserved. EIN: 99-5139258.
+      </div>
+    </div>
+  </footer>
+
+  <script src="assets/js/main.js"></script>
+</body>
+</html>
