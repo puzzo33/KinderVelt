@@ -1,0 +1,37 @@
+{
+  "month": "2026-06",
+  "tolerance_uah": "1.0",
+  "accounts": [
+    {
+      "account": "oschad_uah",
+      "book_opening": "100000.00",
+      "income_uah": "120.00",
+      "expenses_uah": "0",
+      "computed_closing": "100120.00",
+      "book_closing": "100120.00",
+      "bank_closing": "100120.00",
+      "prior_bank_closing": null,
+      "statement_present": true,
+      "reconciled": true,
+      "breaks": []
+    },
+    {
+      "account": "privat_uah",
+      "book_opening": "250000.00",
+      "income_uah": "498000.00",
+      "expenses_uah": "-311250.00",
+      "computed_closing": "436750.00",
+      "book_closing": "436750.00",
+      "bank_closing": "436750.00",
+      "prior_bank_closing": null,
+      "statement_present": true,
+      "reconciled": true,
+      "breaks": []
+    }
+  ],
+  "txns_total": 9,
+  "txns_bank_matched": 9,
+  "bank_lines_total": 9,
+  "bank_lines_unmatched": 0,
+  "fully_reconciled": true
+}

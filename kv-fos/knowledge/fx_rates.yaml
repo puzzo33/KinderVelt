@@ -1,0 +1,15 @@
+# KV-FOS reference FX rates (SPEC §9.9, decision D-6).
+# Source: National Bank of Ukraine official daily rate (UAH per 1 USD).
+# The Treasurer (or an automated fetch, later phase) appends rates monthly.
+# Realized Wise rates always take precedence for US transfers.
+source: "NBU official daily rate"
+fallback_policy: "nearest_prior_within_7_days"   # else the figure is a gap
+rates:
+  "2026-06-01": 41.62
+  "2026-06-05": 41.55
+  "2026-06-10": 41.70
+  "2026-06-12": 41.68
+  "2026-06-15": 41.74
+  "2026-06-20": 41.80
+  "2026-06-25": 41.77
+  "2026-06-30": 41.85

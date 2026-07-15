@@ -1,0 +1,102 @@
+[
+  {
+    "finding_id": "X0ccd72065081",
+    "month": "2026-06",
+    "rule": "large_one_time_expense",
+    "severity": "medium",
+    "title": "Large expense $514.35 — ТОВ Арт-Плюс",
+    "explanation": "Single expense of ₴21500.00 (~$514.35) exceeds the $500 materiality threshold.",
+    "evidence": [
+      {
+        "doc_id": "75f3c5ce8cc6",
+        "file": "workbook_2026-06.xlsx",
+        "locator": "sheet=GeneralLedger row=8"
+      }
+    ],
+    "txn_ids": [
+      "Tab1f99f4f7f6"
+    ],
+    "status": "open",
+    "resolution": null
+  },
+  {
+    "finding_id": "X0fb27c107e6e",
+    "month": "2026-06",
+    "rule": "large_one_time_expense",
+    "severity": "medium",
+    "title": "Large expense $4312.41 — Заробітна плата",
+    "explanation": "Single expense of ₴180000.00 (~$4312.41) exceeds the $500 materiality threshold.",
+    "evidence": [
+      {
+        "doc_id": "75f3c5ce8cc6",
+        "file": "workbook_2026-06.xlsx",
+        "locator": "sheet=GeneralLedger row=5"
+      }
+    ],
+    "txn_ids": [
+      "T66cf298d9f0f"
+    ],
+    "status": "open",
+    "resolution": null
+  },
+  {
+    "finding_id": "X32239ad2cad4",
+    "month": "2026-06",
+    "rule": "large_one_time_expense",
+    "severity": "medium",
+    "title": "Large expense $1247.00 — ФОП Юриев",
+    "explanation": "Single expense of ₴52000.00 (~$1247.00) exceeds the $500 materiality threshold.",
+    "evidence": [
+      {
+        "doc_id": "75f3c5ce8cc6",
+        "file": "workbook_2026-06.xlsx",
+        "locator": "sheet=GeneralLedger row=3"
+      }
+    ],
+    "txn_ids": [
+      "T9c789d912cff"
+    ],
+    "status": "open",
+    "resolution": null
+  },
+  {
+    "finding_id": "X99506d0d6dc0",
+    "month": "2026-06",
+    "rule": "large_one_time_expense",
+    "severity": "medium",
+    "title": "Large expense $948.73 — ДПС України",
+    "explanation": "Single expense of ₴39600.00 (~$948.73) exceeds the $500 materiality threshold.",
+    "evidence": [
+      {
+        "doc_id": "75f3c5ce8cc6",
+        "file": "workbook_2026-06.xlsx",
+        "locator": "sheet=GeneralLedger row=6"
+      }
+    ],
+    "txn_ids": [
+      "T2a0ac8b230d6"
+    ],
+    "status": "open",
+    "resolution": null
+  },
+  {
+    "finding_id": "X683bbf4a40c5",
+    "month": "2026-06",
+    "rule": "new_vendor",
+    "severity": "medium",
+    "title": "New vendor: ТОВ Арт-Плюс",
+    "explanation": "Counterparty “ТОВ Арт-Плюс” is not in the vendor master or learned aliases. Confirm who this is; confirming adds an alias so it is never asked again.",
+    "evidence": [
+      {
+        "doc_id": "75f3c5ce8cc6",
+        "file": "workbook_2026-06.xlsx",
+        "locator": "sheet=GeneralLedger row=8"
+      }
+    ],
+    "txn_ids": [
+      "Tab1f99f4f7f6"
+    ],
+    "status": "open",
+    "resolution": null
+  }
+]

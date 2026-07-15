@@ -1,0 +1,53 @@
+# KV-FOS: monthly treasurer reminder (SPEC §5 step 1).
+# On the 1st of each month (and on demand) it checks which months still
+# need attention and opens/updates a GitHub issue with the checklist.
+name: KV-FOS monthly reminder
+
+on:
+  schedule:
+    - cron: "0 9 1 * *"   # 09:00 UTC on the 1st of every month
+  workflow_dispatch:
+
+permissions:
+  issues: write
+  contents: read
+
+jobs:
+  remind:
+    runs-on: ubuntu-latest
+    env:
+      PYTHONPATH: kv-fos
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: pip install -r kv-fos/requirements.txt
+      - name: Compute reminder
+        id: remind
+        run: |
+          python -m kvfos --root kv-fos remind --format github-issue > reminder.json
+          echo "actionable=$(python -c 'import json;print(json.load(open("reminder.json"))["actionable"])')" >> "$GITHUB_OUTPUT"
+      - name: Open or update reminder issue
+        if: steps.remind.outputs.actionable != '0'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const payload = JSON.parse(fs.readFileSync('reminder.json', 'utf8'));
+            const {data: issues} = await github.rest.issues.listForRepo({
+              owner: context.repo.owner, repo: context.repo.repo,
+              state: 'open', labels: 'kv-fos-reminder',
+            });
+            if (issues.length > 0) {
+              await github.rest.issues.update({
+                owner: context.repo.owner, repo: context.repo.repo,
+                issue_number: issues[0].number, body: payload.body,
+              });
+            } else {
+              await github.rest.issues.create({
+                owner: context.repo.owner, repo: context.repo.repo,
+                title: payload.title, body: payload.body,
+                labels: ['kv-fos-reminder'],
+              });
+            }

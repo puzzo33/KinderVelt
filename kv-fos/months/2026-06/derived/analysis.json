@@ -1,0 +1,164 @@
+{
+  "financial": {
+    "month": "2026-06",
+    "income_uah": "498120.00",
+    "income_usd": "12002.87",
+    "expenses_uah": "311250.00",
+    "expenses_usd": "7457.82",
+    "net_uah": "186870.00",
+    "by_category": {
+      "program_staff": {
+        "uah": "180000.00",
+        "usd": "4312.41",
+        "count": 1,
+        "label": "Program Staff"
+      },
+      "rent": {
+        "uah": "52000.00",
+        "usd": "1247.00",
+        "count": 1,
+        "label": "Rent"
+      },
+      "payroll_taxes": {
+        "uah": "39600.00",
+        "usd": "948.73",
+        "count": 1,
+        "label": "Payroll Taxes"
+      },
+      "therapy_materials": {
+        "uah": "21500.00",
+        "usd": "514.35",
+        "count": 1,
+        "label": "Therapy Materials"
+      },
+      "utilities": {
+        "uah": "14500.00",
+        "usd": "347.89",
+        "count": 1,
+        "label": "Utilities"
+      },
+      "shipping": {
+        "uah": "3200.00",
+        "usd": "76.67",
+        "count": 1,
+        "label": "Shipping"
+      },
+      "bank_fees": {
+        "uah": "450.00",
+        "usd": "10.77",
+        "count": 1,
+        "label": "Bank Fees"
+      }
+    },
+    "by_group": {
+      "administration": "66950.00",
+      "program": "204700.00",
+      "taxes": "39600.00"
+    },
+    "by_vendor": {
+      "kv_payroll": {
+        "name": "Заробітна плата",
+        "uah": "180000.00",
+        "usd": "4312.41",
+        "count": 1
+      },
+      "fop_yuriev": {
+        "name": "ФОП Юриев",
+        "uah": "52000.00",
+        "usd": "1247.00",
+        "count": 1
+      },
+      "tax_office": {
+        "name": "ДПС України",
+        "uah": "39600.00",
+        "usd": "948.73",
+        "count": 1
+      },
+      "unknown:ТОВ Арт-Плюс": {
+        "name": "ТОВ Арт-Плюс",
+        "uah": "21500.00",
+        "usd": "514.35",
+        "count": 1
+      },
+      "r_technopark": {
+        "name": "Р-Технопарк",
+        "uah": "14500.00",
+        "usd": "347.89",
+        "count": 1
+      },
+      "nova_poshta": {
+        "name": "Нова Пошта",
+        "uah": "3200.00",
+        "usd": "76.67",
+        "count": 1
+      },
+      "privatbank": {
+        "name": "ПриватБанк",
+        "uah": "450.00",
+        "usd": "10.77",
+        "count": 1
+      }
+    },
+    "by_center": {
+      "kharkiv": "3200.00",
+      "kyiv": "52000.00",
+      "odessa": "21500.00",
+      "unallocated": "234550.00"
+    },
+    "program_uah": "204700.00",
+    "admin_uah": "66950.00",
+    "taxes_uah": "39600.00",
+    "program_share_pct": "65.77"
+  },
+  "operational": {
+    "month": "2026-06",
+    "totals": {
+      "children_served": 443,
+      "consultations": 181,
+      "classes": 274,
+      "new_children": 25
+    },
+    "centers": {
+      "kyiv": {
+        "children_served": 145,
+        "consultations": 62,
+        "classes": 88,
+        "new_children": 9,
+        "expenses_uah": "52000.00",
+        "cost_per_child_uah": "358.62"
+      },
+      "kharkiv": {
+        "children_served": 118,
+        "consultations": 48,
+        "classes": 74,
+        "new_children": 7,
+        "expenses_uah": "3200.00",
+        "cost_per_child_uah": "27.12"
+      },
+      "odessa": {
+        "children_served": 96,
+        "consultations": 41,
+        "classes": 60,
+        "new_children": 5,
+        "expenses_uah": "21500.00",
+        "cost_per_child_uah": "223.96"
+      },
+      "mykolaiv": {
+        "children_served": 84,
+        "consultations": 30,
+        "classes": 52,
+        "new_children": 4,
+        "expenses_uah": null,
+        "cost_per_child_uah": null
+      }
+    },
+    "missing_centers": [],
+    "unit_economics": {
+      "method": "program-group expenses divided by metric totals; Estimated (allocation-dependent), UAH",
+      "cost_per_child_served_uah": "462.08",
+      "cost_per_consultation_uah": "1130.94",
+      "cost_per_class_uah": "747.08"
+    },
+    "total_expenses_uah": "311250.00"
+  }
+}

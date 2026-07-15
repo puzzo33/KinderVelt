@@ -1,0 +1,38 @@
+{
+  "rubric_version": 1,
+  "overall": 100,
+  "risk": "LOW",
+  "components": {
+    "bank_reconciliation": {
+      "weight": 30,
+      "earned": "30.00",
+      "status": "ok",
+      "detail": "2/2 accounts reconciled"
+    },
+    "transfer_matching": {
+      "weight": 20,
+      "earned": "20.00",
+      "status": "ok",
+      "detail": "1/1 transfers traced to a bank deposit"
+    },
+    "expense_categorization": {
+      "weight": 20,
+      "earned": "20.00",
+      "status": "ok",
+      "detail": "7/7 expenses confidently categorized"
+    },
+    "program_metrics": {
+      "weight": 10,
+      "earned": "10.00",
+      "status": "ok",
+      "detail": "4/4 active centers reported metrics"
+    },
+    "supporting_documentation": {
+      "weight": 20,
+      "earned": "20.00",
+      "status": "ok",
+      "detail": "no documentation gaps"
+    }
+  },
+  "disclaimer": "This score is an aid to the Treasurer's review, not an audit opinion."
+}

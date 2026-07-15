@@ -1,0 +1,28 @@
+# KV-FOS materiality rules (SPEC §7.5).
+# All thresholds are configuration — editable by the Treasurer without any
+# change to system logic. Version bumps on every edit; reports state the
+# version in effect for the month.
+version: 1
+thresholds:
+  single_expense_usd: 500        # single expense above this is flagged
+  payroll_change_pct: 10         # month-over-month payroll variance
+  rent_change_pct: 5
+  utility_change_pct: 20
+  cash_balance_change_pct: 20
+  # reconciliation tolerance: book-vs-bank differences at or below this
+  # (per account, in UAH) are treated as rounding, not exceptions
+  reconciliation_tolerance_uah: 1.00
+  # bank matching: a ledger txn and bank line match when amounts are equal
+  # and dates are within this many days
+  bank_match_window_days: 3
+  # transfer tracing: UAH received may differ from expected by fees up to
+  # this percentage and still be considered the same transfer
+  transfer_amount_tolerance_pct: 1.5
+
+always_flag:
+  - new_vendor
+  - missing_invoice
+  - duplicate_payment
+  - cash_withdrawal
+  - unknown_expense
+  - unmatched_transfer

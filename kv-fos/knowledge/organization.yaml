@@ -1,0 +1,39 @@
+# KV-FOS organization configuration (SPEC §7.1)
+organization:
+  us_entity: "Friends of Kinder Velt USA, Inc."
+  ua_entity: "Kinder Velt Ukraine"
+  treasurer: "Nick Kremer"
+  # First month the oversight system covers; the reminder and status
+  # commands expect every month from here forward to be closed.
+  start_month: "2026-06"
+  base_currency: "UAH"
+  report_currency: "USD"
+
+centers:
+  - id: kyiv
+    name: Kyiv
+    active: true
+  - id: kharkiv
+    name: Kharkiv
+    active: true
+  - id: odessa
+    name: Odessa
+    active: true
+  - id: mykolaiv
+    name: Mykolaiv
+    active: true
+  - id: kropyvnytskyi
+    name: Kropyvnytskyi
+    active: false   # historical — retained for trend continuity (SPEC §7.1)
+
+# Bank/cash accounts of the Ukrainian entity. Every active account must be
+# covered by a bank statement each month or a gap is raised (SPEC §6.1).
+accounts:
+  - id: privat_uah
+    name: "PrivatBank UAH operating"
+    currency: UAH
+    active: true
+  - id: oschad_uah
+    name: "Oschadbank UAH reserve"
+    currency: UAH
+    active: true

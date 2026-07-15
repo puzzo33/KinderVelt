@@ -1,0 +1,51 @@
+# KV-FOS expense taxonomy (SPEC §7.3). Two levels: group -> leaf category.
+# Categories are configuration; never delete a category that historical
+# transactions reference — mark it retired instead.
+groups:
+  program:
+    name: Program
+    categories:
+      psychologist_salaries: Psychologist Salaries
+      therapists: Therapists
+      program_staff: Program Staff
+      therapy_materials: Therapy Materials
+      educational_materials: Educational Materials
+      toys: Toys
+      art_supplies: Art Supplies
+      travel: Travel
+      shipping: Shipping
+  administration:
+    name: Administration
+    categories:
+      rent: Rent
+      utilities: Utilities
+      internet: Internet
+      accounting: Accounting
+      legal: Legal
+      office_supplies: Office Supplies
+      bank_fees: Bank Fees
+      software: Software
+      professional_services: Professional Services
+  taxes:
+    name: Taxes
+    categories:
+      payroll_taxes: Payroll Taxes
+      government_fees: Government Fees
+
+# Income categories (books record inflows too).
+income_categories:
+  us_transfer: "Transfer from Friends of Kinder Velt USA"
+  local_donation: "Local Donation"
+  other_income: "Other Income"
+
+# Mapping from the accountant's chart-of-accounts codes to leaf categories.
+# Grown over time as the accountant's chart is learned (SPEC §7.6).
+account_map:
+  "631-RENT": rent
+  "631-UTIL": utilities
+  "661-PAYR": program_staff
+  "641-PTAX": payroll_taxes
+  "631-SHIP": shipping
+  "631-MATL": therapy_materials
+  "685-BANK": bank_fees
+  "685-ACCT": accounting
