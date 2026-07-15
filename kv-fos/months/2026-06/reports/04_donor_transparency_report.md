@@ -1,6 +1,6 @@
 # Transparency Report (DRAFT — for Treasurer review) — 2026-06
 
-*Friends of Kinder Velt USA, Inc. — Financial Oversight System. Generated 2026-07-15 03:38 UTC.*
+*Friends of Kinder Velt USA, Inc. — Financial Oversight System. Generated 2026-07-15 11:55 UTC.*
 
 - **Donations put to work:** ₴311,250.00 (~$7,457.82)
 - **Program spending:** ₴204,700.00
