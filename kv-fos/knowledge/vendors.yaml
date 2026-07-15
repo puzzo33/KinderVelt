@@ -1,0 +1,61 @@
+# KV-FOS Vendor Master (SPEC §7.2).
+# Canonical names keep the original script; aliases accumulate every
+# spelling variant ever confirmed by the Treasurer (SPEC §7.6) so the same
+# question is never asked twice.
+vendors:
+  - id: fop_yuriev
+    name: "ФОП Юриев"
+    translit: "FOP Yuriev"
+    aliases: ["ФОП Юрієв", "FOP YURIEV", "ФОП ЮРИЕВ"]
+    category: rent
+    centers: [kyiv]
+    recurrence: monthly
+    classification: administration
+    expected_uah: { min: 40000, max: 60000 }
+
+  - id: r_technopark
+    name: "Р-Технопарк"
+    translit: "R-Technopark"
+    aliases: ["Р-ТЕХНОПАРК", "R-TECHNOPARK", "ТОВ Р-Технопарк"]
+    category: utilities
+    centers: []            # serves multiple centers
+    recurrence: monthly
+    classification: administration
+    expected_uah: { min: 8000, max: 35000 }   # seasonal (winter heating)
+
+  - id: nova_poshta
+    name: "Нова Пошта"
+    translit: "Nova Poshta"
+    aliases: ["НОВА ПОШТА", "NOVA POSHTA", "ТОВ Нова Пошта", "Nova Poshta LLC"]
+    category: shipping
+    centers: []
+    recurrence: monthly
+    classification: program
+    expected_uah: { min: 500, max: 15000 }
+
+  - id: kv_payroll
+    name: "Заробітна плата"
+    translit: "Payroll"
+    aliases: ["ЗАРОБІТНА ПЛАТА", "Payroll", "Зарплата", "виплата зарплати"]
+    category: program_staff
+    centers: []
+    recurrence: monthly
+    classification: program
+
+  - id: tax_office
+    name: "ДПС України"
+    translit: "State Tax Service"
+    aliases: ["ДПС", "Податкова", "ЄСВ", "Военний збір", "ПДФО"]
+    category: payroll_taxes
+    centers: []
+    recurrence: monthly
+    classification: taxes
+
+  - id: privatbank
+    name: "ПриватБанк"
+    translit: "PrivatBank"
+    aliases: ["ПРИВАТБАНК", "PrivatBank", "Комісія банку", "комісія за переказ"]
+    category: bank_fees
+    centers: []
+    recurrence: monthly
+    classification: administration

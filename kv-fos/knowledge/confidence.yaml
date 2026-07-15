@@ -1,0 +1,27 @@
+# KV-FOS confidence scoring rubric (SPEC §11).
+# The score is computed, not subjective: each component derives from
+# measurable facts and the derivation is shown in the Treasurer Report.
+# The rubric is versioned configuration, like materiality.
+version: 1
+components:
+  bank_reconciliation:
+    weight: 30
+    # full marks when every account's book closing balance matches the
+    # bank statement within tolerance; zero when any account is unreconciled
+  transfer_matching:
+    weight: 20
+    # share of US transfers whose chain reaches "deposit confirmed in bank"
+  expense_categorization:
+    weight: 20
+    # share of expense transactions with a non-uncertain category
+  program_metrics:
+    weight: 10
+    # share of active centers with statistics present
+  supporting_documentation:
+    weight: 20
+    # penalty per open documentation gap (missing invoice, unreadable doc)
+    penalty_per_gap: 4
+
+risk_bands:
+  low: 90      # score >= 90  -> LOW
+  medium: 75   # score >= 75  -> MEDIUM, else HIGH

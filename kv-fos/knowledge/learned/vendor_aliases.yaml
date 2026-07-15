@@ -1,0 +1,10 @@
+# Learned vendor aliases (SPEC §7.6).
+# When the Treasurer confirms that a new counterparty string is an existing
+# vendor, the mapping is recorded here and matched automatically forever
+# after. Entries are appended by resolving "new_vendor" exceptions.
+# Format:
+#   - alias: "ФОП ЮР'ЄВ О.О."
+#     vendor: fop_yuriev
+#     confirmed: "2026-07-03"
+#     by: treasurer
+aliases: []

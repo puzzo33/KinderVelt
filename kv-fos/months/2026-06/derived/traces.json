@@ -1,0 +1,68 @@
+[
+  {
+    "transfer_id": "TR-8801",
+    "month": "2026-06",
+    "amount_usd": "12000.00",
+    "amount_uah": "498000.00",
+    "rate": "41.50",
+    "date_sent": "2026-06-03",
+    "date_delivered": "2026-06-05",
+    "links": [
+      {
+        "step": "funding_request",
+        "status": "matched",
+        "detail": "request for $12000.00 (funding_request_2026-06.txt)",
+        "refs": [
+          {
+            "doc_id": "64e89f464c5f",
+            "file": "funding_request_2026-06.txt"
+          }
+        ]
+      },
+      {
+        "step": "wise_confirmation",
+        "status": "matched",
+        "detail": "Wise TR-8801: $12000.00 sent 2026-06-03",
+        "refs": [
+          {
+            "doc_id": "199b2c017722",
+            "file": "wise_2026-06.csv",
+            "locator": "table row=2"
+          }
+        ]
+      },
+      {
+        "step": "wise_delivery",
+        "status": "matched",
+        "detail": "delivered 2026-06-05, ₴498000.00 at rate 41.50",
+        "refs": []
+      },
+      {
+        "step": "bank_deposit",
+        "status": "matched",
+        "detail": "₴498000.00 credited 2026-06-05 (privat_uah)",
+        "refs": [
+          {
+            "doc_id": "92575a5ac8ff",
+            "file": "bank_privat_uah_2026-06.csv",
+            "locator": "table row=2"
+          }
+        ]
+      },
+      {
+        "step": "ledger_entry",
+        "status": "matched",
+        "detail": "booked ₴498000.00 on 2026-06-05",
+        "refs": [
+          {
+            "doc_id": "75f3c5ce8cc6",
+            "file": "workbook_2026-06.xlsx",
+            "locator": "sheet=GeneralLedger row=2"
+          }
+        ]
+      }
+    ],
+    "chain_complete": true,
+    "deposit_confirmed": true
+  }
+]

@@ -1,0 +1,28 @@
+# KV-FOS: test suite on every change to the system or its knowledge base.
+name: KV-FOS CI
+
+on:
+  push:
+    paths:
+      - "kv-fos/**"
+      - ".github/workflows/kvfos-*.yml"
+  pull_request:
+    paths:
+      - "kv-fos/**"
+      - ".github/workflows/kvfos-*.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: pip install -r kv-fos/requirements.txt
+      - run: python -m pytest kv-fos/tests -q
+      - name: Knowledge base validates
+        run: python -c "from pathlib import Path; import sys; sys.path.insert(0,'kv-fos'); from kvfos.config import load_knowledge; load_knowledge(Path('kv-fos')); print('knowledge base OK')"

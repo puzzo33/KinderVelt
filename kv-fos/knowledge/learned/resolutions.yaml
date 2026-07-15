@@ -1,0 +1,13 @@
+# Learned exception resolutions (SPEC §7.6, §12).
+# Every accepted exception whose explanation generalizes is recorded here;
+# equivalent future findings are auto-explained instead of re-flagged.
+# Match keys: rule (required), plus any of vendor, category, month_of_year,
+# account. `explanation` is shown on the auto-explained finding.
+# Format:
+#   - rule: large_one_time_expense
+#     vendor: insurance_co
+#     month_of_year: 7
+#     explanation: "Annual liability insurance premium, paid each July."
+#     accepted: "2026-07-03"
+#     by: treasurer
+resolutions: []

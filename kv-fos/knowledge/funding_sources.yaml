@@ -1,0 +1,21 @@
+# KV-FOS funding sources (SPEC §7.4). Restricted sources carry their
+# restriction terms; v1 records them and flags plainly contradictory
+# spending (full compliance checking is Phase 4).
+funding_sources:
+  - id: fokv_general
+    name: "Friends of Kinder Velt USA — General Donations"
+    restricted: false
+  - id: corporate
+    name: "Corporate Sponsors"
+    restricted: false
+  - id: restricted_campaigns
+    name: "Restricted Campaigns"
+    restricted: true
+    restriction: "Per-campaign terms; see campaign documentation."
+  - id: grants
+    name: "Grant Funding"
+    restricted: true
+    restriction: "Per grant agreement."
+  - id: individual
+    name: "Individual Donors"
+    restricted: false

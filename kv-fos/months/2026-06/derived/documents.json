@@ -1,0 +1,74 @@
+[
+  {
+    "doc_id": "20766c8326d2",
+    "file": "CenterUpdates_2026-06.csv",
+    "doc_type": "center_stats",
+    "month": "2026-06",
+    "account": null,
+    "sha256": "20766c8326d208cb7090fe0330e0d90b9b79068634e61633d9efda9ad6939689",
+    "size": 136,
+    "extraction_confidence": "high",
+    "superseded_by": null,
+    "notes": ""
+  },
+  {
+    "doc_id": "098c22471733",
+    "file": "bank_oschad_uah_2026-06.csv",
+    "doc_type": "bank_statement",
+    "month": "2026-06",
+    "account": "oschad_uah",
+    "sha256": "098c224717338157989eb89671ff0e32ba3fd65350febf4e6fe6343deebb879b",
+    "size": 124,
+    "extraction_confidence": "high",
+    "superseded_by": null,
+    "notes": ""
+  },
+  {
+    "doc_id": "92575a5ac8ff",
+    "file": "bank_privat_uah_2026-06.csv",
+    "doc_type": "bank_statement",
+    "month": "2026-06",
+    "account": "privat_uah",
+    "sha256": "92575a5ac8ff2dff5b14119e812a6e74cba8957103d52876833291d081082352",
+    "size": 607,
+    "extraction_confidence": "high",
+    "superseded_by": null,
+    "notes": ""
+  },
+  {
+    "doc_id": "64e89f464c5f",
+    "file": "funding_request_2026-06.txt",
+    "doc_type": "funding_request",
+    "month": "2026-06",
+    "account": null,
+    "sha256": "64e89f464c5f0cdfe72378fa29a37325fc4ef804816560c5d55fe3806f9093d1",
+    "size": 202,
+    "extraction_confidence": "high",
+    "superseded_by": null,
+    "notes": ""
+  },
+  {
+    "doc_id": "199b2c017722",
+    "file": "wise_2026-06.csv",
+    "doc_type": "wise_transfer",
+    "month": "2026-06",
+    "account": null,
+    "sha256": "199b2c017722fa57495d5f2b106cfa25582bc5969b5399f53a5d22dc18a67951",
+    "size": 162,
+    "extraction_confidence": "high",
+    "superseded_by": null,
+    "notes": ""
+  },
+  {
+    "doc_id": "75f3c5ce8cc6",
+    "file": "workbook_2026-06.xlsx",
+    "doc_type": "accounting_workbook",
+    "month": "2026-06",
+    "account": null,
+    "sha256": "75f3c5ce8cc69b833728e3d294644ddff0e6c31ecd0a33de0bed73cd5b072d4d",
+    "size": 7911,
+    "extraction_confidence": "high",
+    "superseded_by": null,
+    "notes": ""
+  }
+]
