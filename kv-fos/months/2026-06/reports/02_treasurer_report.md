@@ -1,6 +1,6 @@
 # Treasurer Report — 2026-06
 
-*Friends of Kinder Velt USA, Inc. — Financial Oversight System. Generated 2026-07-18 23:57 UTC.*
+*Friends of Kinder Velt USA, Inc. — Financial Oversight System. Generated 2026-07-18 23:59 UTC.*
 
 ## Confidence: 100/100 — LOW
 
