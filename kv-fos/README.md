@@ -117,6 +117,19 @@ python tools/make_sample_data.py   # regenerate the 2026-06 sample month
 
 `months/2026-06/` is a complete worked example (synthetic data).
 
+## Treasurer Console (dashboard)
+
+```bash
+python -m kvfos dashboard    # regenerates kv-fos/dashboard/dashboard.html
+```
+
+A single self-contained HTML page: month pipeline with next actions,
+input checklist, exception queue with copy-able teaching YAML, gaps,
+transfer trace chains, and the month's analytics. The process workflow
+regenerates it on every close; it is also published as a private Claude
+Artifact for the Treasurer. Treasurer-level detail (SPEC §8) — do not
+publish it anywhere public.
+
 ## Automation
 
 - `.github/workflows/kvfos-reminder.yml` — opens the monthly reminder issue

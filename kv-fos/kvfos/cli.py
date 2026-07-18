@@ -178,6 +178,13 @@ def cmd_approve(root: Path, args) -> int:
     return 0
 
 
+def cmd_dashboard(root: Path, args) -> int:
+    from . import dashboard
+    out = dashboard.generate(root, args.out)
+    print(f"dashboard written to {out}")
+    return 0
+
+
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(prog="kvfos",
                                      description="Kinder Velt Financial Oversight System")
@@ -207,6 +214,11 @@ def main(argv: list[str] | None = None) -> int:
     p = sub.add_parser("approve", help="approve & lock a closed month")
     p.add_argument("--month", required=True)
     p.set_defaults(fn=cmd_approve)
+
+    p = sub.add_parser("dashboard",
+                       help="regenerate the Treasurer Console HTML")
+    p.add_argument("--out", type=Path, default=None)
+    p.set_defaults(fn=cmd_dashboard)
 
     args = parser.parse_args(argv)
     root = args.root or find_root(Path(__file__).parent)

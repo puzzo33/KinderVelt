@@ -60,13 +60,14 @@ jobs:
             python -m kvfos --root kv-fos close --month "$m" || true
             echo "::endgroup::"
           done
+          python -m kvfos --root kv-fos dashboard
 
       - name: Commit reports back
         if: steps.months.outputs.list != ''
         run: |
           git config user.name "kv-fos-bot"
           git config user.email "kv-fos-bot@users.noreply.github.com"
-          git add kv-fos/months kv-fos/registry
+          git add kv-fos/months kv-fos/registry kv-fos/dashboard
           if git diff --cached --quiet; then
             echo "nothing to commit"
           else
