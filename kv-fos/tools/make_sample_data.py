@@ -101,6 +101,14 @@ def build(inputs: Path, month: str = "2026-06") -> None:
               ["Date", "Description", "Counterparty", "Amount", "Balance"],
               [[f"{y_m}-30", "Нараховані відсотки", "ОЩАДБАНК", 120, 100120]])
 
+    # US entity — TD Bank statement (USD)
+    write_csv(f"bank_td_usd_{y_m}.csv",
+              ["Date", "Description", "Counterparty", "Amount", "Balance"],
+              [[f"{y_m}-01", "Stripe payout — online donations", "STRIPE", 4200, 52700],
+               [f"{y_m}-03", "Wise transfer to Kinder Velt Ukraine", "WISE", -12000, 40700],
+               [f"{y_m}-16", "Stripe payout — online donations", "STRIPE", 5100, 45800],
+               [f"{y_m}-28", "Monthly service fee", "TD BANK", -25, 45775]])
+
     # ---- center statistics ------------------------------------------------
     write_csv(f"CenterUpdates_{y_m}.csv",
               ["Center", "ChildrenServed", "Consultations", "Classes",

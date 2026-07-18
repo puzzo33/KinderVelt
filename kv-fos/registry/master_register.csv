@@ -1,10 +1,10 @@
 month,date,txn_id,account,direction,vendor,vendor_id,category,center,amount_uah,amount_usd,fx_source,funding_source,status,usd_status,invoice_ref,source_file,source_locator,doc_id
-2026-06,2026-06-05,Tfff35807c5bd,privat_uah,income,Wise Europe SA,,us_transfer,,498000.00,12000.00,wise-realized TR-8801,fokv_general,verified,verified,,workbook_2026-06.xlsx,sheet=GeneralLedger row=2,75f3c5ce8cc6
-2026-06,2026-06-10,T9c789d912cff,privat_uah,expense,ФОП Юриев,fop_yuriev,rent,kyiv,-52000.00,1247.00,NBU 2026-06-10,,verified,estimated,INV-101,workbook_2026-06.xlsx,sheet=GeneralLedger row=3,75f3c5ce8cc6
-2026-06,2026-06-12,T3e9125d88c0b,privat_uah,expense,Р-Технопарк,r_technopark,utilities,,-14500.00,347.89,NBU 2026-06-12,,verified,estimated,INV-102,workbook_2026-06.xlsx,sheet=GeneralLedger row=4,75f3c5ce8cc6
-2026-06,2026-06-15,T2a0ac8b230d6,privat_uah,expense,ДПС України,tax_office,payroll_taxes,,-39600.00,948.73,NBU 2026-06-15,,verified,estimated,PAY-06,workbook_2026-06.xlsx,sheet=GeneralLedger row=6,75f3c5ce8cc6
-2026-06,2026-06-15,T66cf298d9f0f,privat_uah,expense,Заробітна плата,kv_payroll,program_staff,,-180000.00,4312.41,NBU 2026-06-15,,verified,estimated,PAY-06,workbook_2026-06.xlsx,sheet=GeneralLedger row=5,75f3c5ce8cc6
-2026-06,2026-06-18,Ted8e94420a07,privat_uah,expense,Нова Пошта,nova_poshta,shipping,kharkiv,-3200.00,76.67,NBU 2026-06-15 (nearest prior),,verified,estimated,EXP-77,workbook_2026-06.xlsx,sheet=GeneralLedger row=7,75f3c5ce8cc6
-2026-06,2026-06-20,Tab1f99f4f7f6,privat_uah,expense,ТОВ Арт-Плюс,,therapy_materials,odessa,-21500.00,514.35,NBU 2026-06-20,,verified,estimated,INV-103,workbook_2026-06.xlsx,sheet=GeneralLedger row=8,75f3c5ce8cc6
-2026-06,2026-06-25,Tc98f7e366cd7,privat_uah,expense,ПриватБанк,privatbank,bank_fees,,-450.00,10.77,NBU 2026-06-25,,verified,estimated,,workbook_2026-06.xlsx,sheet=GeneralLedger row=9,75f3c5ce8cc6
-2026-06,2026-06-30,T781ae6daed99,oschad_uah,income,Ощадбанк,,other_income,,120.00,2.87,NBU 2026-06-30,,verified,estimated,,workbook_2026-06.xlsx,sheet=GeneralLedger row=10,75f3c5ce8cc6
+2026-06,2026-06-05,T96064de420c8,privat_uah,income,Wise Europe SA,,us_transfer,,498000.00,12000.00,wise-realized TR-8801,fokv_general,verified,verified,,workbook_2026-06.xlsx,sheet=GeneralLedger row=2,c096517cecb4
+2026-06,2026-06-10,Te962ff59fc83,privat_uah,expense,ФОП Юриев,fop_yuriev,rent,kyiv,-52000.00,1247.00,NBU 2026-06-10,,verified,estimated,INV-101,workbook_2026-06.xlsx,sheet=GeneralLedger row=3,c096517cecb4
+2026-06,2026-06-12,T3b95ce8b6a8d,privat_uah,expense,Р-Технопарк,r_technopark,utilities,,-14500.00,347.89,NBU 2026-06-12,,verified,estimated,INV-102,workbook_2026-06.xlsx,sheet=GeneralLedger row=4,c096517cecb4
+2026-06,2026-06-15,T19e0d9446557,privat_uah,expense,Заробітна плата,kv_payroll,program_staff,,-180000.00,4312.41,NBU 2026-06-15,,verified,estimated,PAY-06,workbook_2026-06.xlsx,sheet=GeneralLedger row=5,c096517cecb4
+2026-06,2026-06-15,T631324924856,privat_uah,expense,ДПС України,tax_office,payroll_taxes,,-39600.00,948.73,NBU 2026-06-15,,verified,estimated,PAY-06,workbook_2026-06.xlsx,sheet=GeneralLedger row=6,c096517cecb4
+2026-06,2026-06-18,Tb33364189f79,privat_uah,expense,Нова Пошта,nova_poshta,shipping,kharkiv,-3200.00,76.67,NBU 2026-06-15 (nearest prior),,verified,estimated,EXP-77,workbook_2026-06.xlsx,sheet=GeneralLedger row=7,c096517cecb4
+2026-06,2026-06-20,Td693f11f67c4,privat_uah,expense,ТОВ Арт-Плюс,,therapy_materials,odessa,-21500.00,514.35,NBU 2026-06-20,,verified,estimated,INV-103,workbook_2026-06.xlsx,sheet=GeneralLedger row=8,c096517cecb4
+2026-06,2026-06-25,Ted324ac2a86d,privat_uah,expense,ПриватБанк,privatbank,bank_fees,,-450.00,10.77,NBU 2026-06-25,,verified,estimated,,workbook_2026-06.xlsx,sheet=GeneralLedger row=9,c096517cecb4
+2026-06,2026-06-30,Tae97cd4883ba,oschad_uah,income,Ощадбанк,,other_income,,120.00,2.87,NBU 2026-06-30,,verified,estimated,,workbook_2026-06.xlsx,sheet=GeneralLedger row=10,c096517cecb4

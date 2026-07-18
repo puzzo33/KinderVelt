@@ -36,6 +36,18 @@
     "notes": ""
   },
   {
+    "doc_id": "90a98e14d5ed",
+    "file": "bank_td_usd_2026-06.csv",
+    "doc_type": "bank_statement",
+    "month": "2026-06",
+    "account": "td_usd",
+    "sha256": "90a98e14d5edcc090ec08a79d673308fb96f76a221d2e48c544aa64196f4eeb8",
+    "size": 293,
+    "extraction_confidence": "high",
+    "superseded_by": null,
+    "notes": ""
+  },
+  {
     "doc_id": "64e89f464c5f",
     "file": "funding_request_2026-06.txt",
     "doc_type": "funding_request",
@@ -60,13 +72,13 @@
     "notes": ""
   },
   {
-    "doc_id": "75f3c5ce8cc6",
+    "doc_id": "c096517cecb4",
     "file": "workbook_2026-06.xlsx",
     "doc_type": "accounting_workbook",
     "month": "2026-06",
     "account": null,
-    "sha256": "75f3c5ce8cc69b833728e3d294644ddff0e6c31ecd0a33de0bed73cd5b072d4d",
-    "size": 7911,
+    "sha256": "c096517cecb47d66fc260bc79178c0bf789c1622953ec773da81d3511aab801b",
+    "size": 7912,
     "extraction_confidence": "high",
     "superseded_by": null,
     "notes": ""

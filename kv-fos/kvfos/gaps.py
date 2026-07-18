@@ -54,6 +54,14 @@ def detect_gaps(k: Knowledge, month: str, docs: list[Document],
             "Request the missing centers' figures and replace the stats file.")
 
     covered = {d.account for d in live(docs, DocType.BANK_STATEMENT.value)}
+    for acc in k.active_us_accounts():
+        if acc["id"] not in covered:
+            gap("material", "missing_input",
+                f"US bank statement missing: {acc['name']}",
+                "Without it the US cash position is unavailable and Wise "
+                "transfers cannot be verified as leaving the US account.",
+                f"Add bank_{acc['id']}_{month}.csv to months/{month}/inputs/ "
+                "and re-run.")
     for acc in k.active_accounts():
         if acc["id"] not in covered:
             gap("blocking", "missing_input",

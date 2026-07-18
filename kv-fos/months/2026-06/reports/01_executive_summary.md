@@ -1,6 +1,6 @@
 # Executive Summary — 2026-06
 
-*Friends of Kinder Velt USA, Inc. — Financial Oversight System. Generated 2026-07-15 03:38 UTC.*
+*Friends of Kinder Velt USA, Inc. — Financial Oversight System. Generated 2026-07-18 23:57 UTC.*
 
 | | UAH | USD |
 |---|---:|---:|
@@ -13,8 +13,8 @@
 **Confidence:** 100/100 — risk LOW
 
 **Major risks / open questions:**
-- Large expense $514.35 — ТОВ Арт-Плюс
 - Large expense $4312.41 — Заробітна плата
 - Large expense $1247.00 — ФОП Юриев
 - Large expense $948.73 — ДПС України
+- Large expense $514.35 — ТОВ Арт-Плюс
 - New vendor: ТОВ Арт-Плюс

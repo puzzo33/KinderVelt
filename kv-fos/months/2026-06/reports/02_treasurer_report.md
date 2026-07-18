@@ -1,6 +1,6 @@
 # Treasurer Report — 2026-06
 
-*Friends of Kinder Velt USA, Inc. — Financial Oversight System. Generated 2026-07-15 03:38 UTC.*
+*Friends of Kinder Velt USA, Inc. — Financial Oversight System. Generated 2026-07-18 23:57 UTC.*
 
 ## Confidence: 100/100 — LOW
 
@@ -16,45 +16,45 @@
 
 ## Exceptions — 5 open
 
-### [MEDIUM] Large expense $514.35 — ТОВ Арт-Плюс
-
-Single expense of ₴21500.00 (~$514.35) exceeds the $500 materiality threshold.
-
-- source: `workbook_2026-06.xlsx` sheet=GeneralLedger row=8 (doc 75f3c5ce8cc6)
-- transactions: Tab1f99f4f7f6
-- finding id: `X0ccd72065081`
-
 ### [MEDIUM] Large expense $4312.41 — Заробітна плата
 
 Single expense of ₴180000.00 (~$4312.41) exceeds the $500 materiality threshold.
 
-- source: `workbook_2026-06.xlsx` sheet=GeneralLedger row=5 (doc 75f3c5ce8cc6)
-- transactions: T66cf298d9f0f
-- finding id: `X0fb27c107e6e`
+- source: `workbook_2026-06.xlsx` sheet=GeneralLedger row=5 (doc c096517cecb4)
+- transactions: T19e0d9446557
+- finding id: `X0ccded6bc48d`
 
 ### [MEDIUM] Large expense $1247.00 — ФОП Юриев
 
 Single expense of ₴52000.00 (~$1247.00) exceeds the $500 materiality threshold.
 
-- source: `workbook_2026-06.xlsx` sheet=GeneralLedger row=3 (doc 75f3c5ce8cc6)
-- transactions: T9c789d912cff
-- finding id: `X32239ad2cad4`
+- source: `workbook_2026-06.xlsx` sheet=GeneralLedger row=3 (doc c096517cecb4)
+- transactions: Te962ff59fc83
+- finding id: `X41f98670d764`
 
 ### [MEDIUM] Large expense $948.73 — ДПС України
 
 Single expense of ₴39600.00 (~$948.73) exceeds the $500 materiality threshold.
 
-- source: `workbook_2026-06.xlsx` sheet=GeneralLedger row=6 (doc 75f3c5ce8cc6)
-- transactions: T2a0ac8b230d6
-- finding id: `X99506d0d6dc0`
+- source: `workbook_2026-06.xlsx` sheet=GeneralLedger row=6 (doc c096517cecb4)
+- transactions: T631324924856
+- finding id: `Xb0e249b09578`
+
+### [MEDIUM] Large expense $514.35 — ТОВ Арт-Плюс
+
+Single expense of ₴21500.00 (~$514.35) exceeds the $500 materiality threshold.
+
+- source: `workbook_2026-06.xlsx` sheet=GeneralLedger row=8 (doc c096517cecb4)
+- transactions: Td693f11f67c4
+- finding id: `Xfaa24eeb79e0`
 
 ### [MEDIUM] New vendor: ТОВ Арт-Плюс
 
 Counterparty “ТОВ Арт-Плюс” is not in the vendor master or learned aliases. Confirm who this is; confirming adds an alias so it is never asked again.
 
-- source: `workbook_2026-06.xlsx` sheet=GeneralLedger row=8 (doc 75f3c5ce8cc6)
-- transactions: Tab1f99f4f7f6
-- finding id: `X683bbf4a40c5`
+- source: `workbook_2026-06.xlsx` sheet=GeneralLedger row=8 (doc c096517cecb4)
+- transactions: Td693f11f67c4
+- finding id: `X114075cf90c0`
 
 
 ## Reconciliation

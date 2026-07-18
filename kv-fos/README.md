@@ -123,12 +123,16 @@ python tools/make_sample_data.py   # regenerate the 2026-06 sample month
 python -m kvfos dashboard    # regenerates kv-fos/dashboard/dashboard.html
 ```
 
-A single self-contained HTML page: month pipeline with next actions,
-input checklist, exception queue with copy-able teaching YAML, gaps,
-transfer trace chains, and the month's analytics. The process workflow
-regenerates it on every close; it is also published as a private Claude
-Artifact for the Treasurer. Treasurer-level detail (SPEC §8) — do not
-publish it anywhere public.
+A single self-contained HTML page in plain language (no CLI/code on the
+page): summary tiles with the TD Bank (US) cash headline, the current
+month's stepper and checklist, month status list, and Ukraine / United
+States entity tabs — exception queue with Accept / Adjust buttons that
+compose a ready-to-send instruction for Claude, missing-information
+cards, account balances, tap-to-expand transfer trails, and analytics.
+USD by default with a global ₴ UAH toggle; mobile-friendly. The process
+workflow regenerates it on every close; it is also published as a
+private Claude Artifact for the Treasurer. Treasurer-level detail
+(SPEC §8) — do not publish it anywhere public.
 
 ## Automation
 

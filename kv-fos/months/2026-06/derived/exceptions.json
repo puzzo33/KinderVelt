@@ -1,26 +1,6 @@
 [
   {
-    "finding_id": "X0ccd72065081",
-    "month": "2026-06",
-    "rule": "large_one_time_expense",
-    "severity": "medium",
-    "title": "Large expense $514.35 — ТОВ Арт-Плюс",
-    "explanation": "Single expense of ₴21500.00 (~$514.35) exceeds the $500 materiality threshold.",
-    "evidence": [
-      {
-        "doc_id": "75f3c5ce8cc6",
-        "file": "workbook_2026-06.xlsx",
-        "locator": "sheet=GeneralLedger row=8"
-      }
-    ],
-    "txn_ids": [
-      "Tab1f99f4f7f6"
-    ],
-    "status": "open",
-    "resolution": null
-  },
-  {
-    "finding_id": "X0fb27c107e6e",
+    "finding_id": "X0ccded6bc48d",
     "month": "2026-06",
     "rule": "large_one_time_expense",
     "severity": "medium",
@@ -28,19 +8,19 @@
     "explanation": "Single expense of ₴180000.00 (~$4312.41) exceeds the $500 materiality threshold.",
     "evidence": [
       {
-        "doc_id": "75f3c5ce8cc6",
+        "doc_id": "c096517cecb4",
         "file": "workbook_2026-06.xlsx",
         "locator": "sheet=GeneralLedger row=5"
       }
     ],
     "txn_ids": [
-      "T66cf298d9f0f"
+      "T19e0d9446557"
     ],
     "status": "open",
     "resolution": null
   },
   {
-    "finding_id": "X32239ad2cad4",
+    "finding_id": "X41f98670d764",
     "month": "2026-06",
     "rule": "large_one_time_expense",
     "severity": "medium",
@@ -48,19 +28,19 @@
     "explanation": "Single expense of ₴52000.00 (~$1247.00) exceeds the $500 materiality threshold.",
     "evidence": [
       {
-        "doc_id": "75f3c5ce8cc6",
+        "doc_id": "c096517cecb4",
         "file": "workbook_2026-06.xlsx",
         "locator": "sheet=GeneralLedger row=3"
       }
     ],
     "txn_ids": [
-      "T9c789d912cff"
+      "Te962ff59fc83"
     ],
     "status": "open",
     "resolution": null
   },
   {
-    "finding_id": "X99506d0d6dc0",
+    "finding_id": "Xb0e249b09578",
     "month": "2026-06",
     "rule": "large_one_time_expense",
     "severity": "medium",
@@ -68,19 +48,39 @@
     "explanation": "Single expense of ₴39600.00 (~$948.73) exceeds the $500 materiality threshold.",
     "evidence": [
       {
-        "doc_id": "75f3c5ce8cc6",
+        "doc_id": "c096517cecb4",
         "file": "workbook_2026-06.xlsx",
         "locator": "sheet=GeneralLedger row=6"
       }
     ],
     "txn_ids": [
-      "T2a0ac8b230d6"
+      "T631324924856"
     ],
     "status": "open",
     "resolution": null
   },
   {
-    "finding_id": "X683bbf4a40c5",
+    "finding_id": "Xfaa24eeb79e0",
+    "month": "2026-06",
+    "rule": "large_one_time_expense",
+    "severity": "medium",
+    "title": "Large expense $514.35 — ТОВ Арт-Плюс",
+    "explanation": "Single expense of ₴21500.00 (~$514.35) exceeds the $500 materiality threshold.",
+    "evidence": [
+      {
+        "doc_id": "c096517cecb4",
+        "file": "workbook_2026-06.xlsx",
+        "locator": "sheet=GeneralLedger row=8"
+      }
+    ],
+    "txn_ids": [
+      "Td693f11f67c4"
+    ],
+    "status": "open",
+    "resolution": null
+  },
+  {
+    "finding_id": "X114075cf90c0",
     "month": "2026-06",
     "rule": "new_vendor",
     "severity": "medium",
@@ -88,13 +88,13 @@
     "explanation": "Counterparty “ТОВ Арт-Плюс” is not in the vendor master or learned aliases. Confirm who this is; confirming adds an alias so it is never asked again.",
     "evidence": [
       {
-        "doc_id": "75f3c5ce8cc6",
+        "doc_id": "c096517cecb4",
         "file": "workbook_2026-06.xlsx",
         "locator": "sheet=GeneralLedger row=8"
       }
     ],
     "txn_ids": [
-      "Tab1f99f4f7f6"
+      "Td693f11f67c4"
     ],
     "status": "open",
     "resolution": null

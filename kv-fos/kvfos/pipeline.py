@@ -90,9 +90,14 @@ def close_month(root: Path, month: str, amend: bool = False) -> dict:
     txns, fx_gaps = ([], [])
     if workbook:
         txns, fx_gaps = normalize.normalize_ledger(k, month, workbook["ledger"])
-    bank_lines = []
+    # US-entity statements (USD) are kept apart from the Ukrainian books:
+    # they anchor the US cash position and transfer verification, never
+    # the UAH reconciliation
+    us_ids = {a["id"] for a in k.active_us_accounts()}
+    bank_lines, us_lines = [], []
     for account, rows in bank_rows_by_account.items():
-        bank_lines.extend(normalize.normalize_bank(k, month, account, rows))
+        lines = normalize.normalize_bank(k, month, account, rows)
+        (us_lines if account in us_ids else bank_lines).extend(lines)
 
     # ---- Stage 3: reconcile ------------------------------------------------
     reconcile.match_bank(k, txns, bank_lines)
@@ -102,7 +107,7 @@ def close_month(root: Path, month: str, amend: bool = False) -> dict:
 
     # ---- Stage 4: funding traceability --------------------------------------
     traces = trace.build_traces(k, month, wise_transfers, funding_requests,
-                                txns, bank_lines)
+                                txns, bank_lines, us_lines)
 
     # ---- Stage 5 & 6: analysis ----------------------------------------------
     fin = analyze.financial_analysis(k, month, txns)
@@ -127,6 +132,9 @@ def close_month(root: Path, month: str, amend: bool = False) -> dict:
             f.write(json.dumps(t.as_dict(), ensure_ascii=False) + "\n")
     with open(derived / "bank_lines.jsonl", "w", encoding="utf-8") as f:
         for l in sorted(bank_lines, key=lambda l: (l.account, l.date, l.line_id)):
+            f.write(json.dumps(l.as_dict(), ensure_ascii=False) + "\n")
+    with open(derived / "us_lines.jsonl", "w", encoding="utf-8") as f:
+        for l in sorted(us_lines, key=lambda l: (l.account, l.date, l.line_id)):
             f.write(json.dumps(l.as_dict(), ensure_ascii=False) + "\n")
     _dump(derived / "reconciliation.json", reconciliation)
     _dump(derived / "traces.json", traces)

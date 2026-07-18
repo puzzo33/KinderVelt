@@ -26,6 +26,15 @@ centers:
     name: Kropyvnytskyi
     active: false   # historical — retained for trend continuity (SPEC §7.1)
 
+# US entity bank accounts. A monthly statement is requested (material gap
+# when absent): it anchors the US cash position and lets each Wise
+# transfer be verified as leaving the US account.
+us_accounts:
+  - id: td_usd
+    name: "TD Bank operating"
+    currency: USD
+    active: true
+
 # Bank/cash accounts of the Ukrainian entity. Every active account must be
 # covered by a bank statement each month or a gap is raised (SPEC §6.1).
 accounts:

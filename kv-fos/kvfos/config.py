@@ -60,6 +60,7 @@ class Knowledge:
     organization: dict
     centers: list[dict]
     accounts: list[dict]
+    us_accounts: list[dict]
     groups: dict
     income_categories: dict
     account_map: dict
@@ -98,6 +99,9 @@ class Knowledge:
 
     def active_accounts(self) -> list[dict]:
         return [a for a in self.accounts if a.get("active")]
+
+    def active_us_accounts(self) -> list[dict]:
+        return [a for a in self.us_accounts if a.get("active")]
 
     def threshold(self, key: str) -> Decimal:
         try:
@@ -174,6 +178,7 @@ def load_knowledge(root: Path) -> Knowledge:
         organization=org.get("organization", {}),
         centers=org.get("centers", []),
         accounts=org.get("accounts", []),
+        us_accounts=org.get("us_accounts", []),
         groups=cats.get("groups", {}),
         income_categories=cats.get("income_categories", {}),
         account_map=cats.get("account_map", {}),

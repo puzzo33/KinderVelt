@@ -132,6 +132,25 @@ def test_missing_statement_gap_then_recovery(root):
     assert s["confidence"] == 100
 
 
+def test_us_side_statement_and_trace_link(root):
+    close(root)
+    traces = read_json(root, MONTH, "traces.json")
+    us_link = [l for l in traces[0]["links"] if l["step"] == "us_bank_debit"][0]
+    assert us_link["status"] == "matched"          # $12,000 left TD Bank
+    assert traces[0]["chain_complete"]
+    # US statement absent -> material gap (not blocking), chain incomplete
+    (root / "months" / MONTH / "inputs" / f"bank_td_usd_{MONTH}.csv").unlink()
+    s = close(root)
+    assert s["gaps_blocking"] == 0
+    gaps = read_json(root, MONTH, "gaps.json")
+    assert any("US bank statement" in g["title"] for g in gaps)
+    traces = read_json(root, MONTH, "traces.json")
+    us_link = [l for l in traces[0]["links"] if l["step"] == "us_bank_debit"][0]
+    assert us_link["status"] == "missing"
+    assert not traces[0]["chain_complete"]
+    assert traces[0]["deposit_confirmed"]          # UA side still verified
+
+
 def test_corrupt_document_becomes_gap_not_crash(root):
     wb_path = root / "months" / MONTH / "inputs" / f"workbook_{MONTH}.xlsx"
     wb_path.write_bytes(b"this is not an excel file")

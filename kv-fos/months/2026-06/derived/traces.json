@@ -20,6 +20,18 @@
         ]
       },
       {
+        "step": "us_bank_debit",
+        "status": "matched",
+        "detail": "$12000.00 debited 2026-06-03 (td_usd)",
+        "refs": [
+          {
+            "doc_id": "90a98e14d5ed",
+            "file": "bank_td_usd_2026-06.csv",
+            "locator": "table row=3"
+          }
+        ]
+      },
+      {
         "step": "wise_confirmation",
         "status": "matched",
         "detail": "Wise TR-8801: $12000.00 sent 2026-06-03",
@@ -55,7 +67,7 @@
         "detail": "booked ₴498000.00 on 2026-06-05",
         "refs": [
           {
-            "doc_id": "75f3c5ce8cc6",
+            "doc_id": "c096517cecb4",
             "file": "workbook_2026-06.xlsx",
             "locator": "sheet=GeneralLedger row=2"
           }

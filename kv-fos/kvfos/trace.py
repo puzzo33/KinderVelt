@@ -20,8 +20,10 @@ def _within(a: str, b: str, days: int) -> bool:
 
 def build_traces(k: Knowledge, month: str, wise_transfers: list[dict],
                  funding_requests: list[dict], txns: list[Transaction],
-                 lines: list[BankLine]) -> list[dict]:
+                 lines: list[BankLine], us_lines: list[BankLine] | None = None
+                 ) -> list[dict]:
     tol_pct = k.threshold("transfer_amount_tolerance_pct") / Decimal(100)
+    us_lines = us_lines or []
     cards = []
     for tr in wise_transfers:
         transfer_id = str(tr.get("transfer_id"))
@@ -41,7 +43,19 @@ def build_traces(k: Knowledge, month: str, wise_transfers: list[dict],
             refs=[{"doc_id": req["doc_id"], "file": req["file"]}] if req else [],
         ))
 
-        # 2. wise confirmation — the transfer record itself
+        # 2. debit visible on the US entity's bank statement
+        us_debit = _find_us_debit(us_lines, usd, tr.get("date_sent"))
+        links.append(TraceLink(
+            step="us_bank_debit",
+            status="matched" if us_debit else "missing",
+            detail=(f"${abs(us_debit.amount_uah)} debited {us_debit.date} "
+                    f"({us_debit.account})" if us_debit else
+                    "no matching debit on the US bank statement"
+                    if us_lines else "US bank statement not provided"),
+            refs=[us_debit.source.as_dict()] if us_debit and us_debit.source else [],
+        ))
+
+        # 3. wise confirmation — the transfer record itself
         links.append(TraceLink(
             step="wise_confirmation",
             status="matched",
@@ -49,7 +63,7 @@ def build_traces(k: Knowledge, month: str, wise_transfers: list[dict],
             refs=[tr["_source"].as_dict()] if tr.get("_source") else [],
         ))
 
-        # 3. delivery confirmation
+        # 4. delivery confirmation
         links.append(TraceLink(
             step="wise_delivery",
             status="matched" if tr.get("date_delivered") else "missing",
@@ -59,7 +73,7 @@ def build_traces(k: Knowledge, month: str, wise_transfers: list[dict],
                     "no delivery confirmation"),
         ))
 
-        # 4. deposit visible on the Ukrainian bank statement
+        # 5. deposit visible on the Ukrainian bank statement
         deposit = _find_deposit(lines, uah, delivered, tol_pct)
         links.append(TraceLink(
             step="bank_deposit",
@@ -70,7 +84,7 @@ def build_traces(k: Knowledge, month: str, wise_transfers: list[dict],
             refs=[deposit.source.as_dict()] if deposit and deposit.source else [],
         ))
 
-        # 5. receipt recorded in the books
+        # 6. receipt recorded in the books
         ledger_entry = _find_ledger_income(txns, uah, delivered, tol_pct)
         links.append(TraceLink(
             step="ledger_entry",
@@ -105,6 +119,18 @@ def build_traces(k: Knowledge, month: str, wise_transfers: list[dict],
             "deposit_confirmed": deposited,
         })
     return cards
+
+
+def _find_us_debit(us_lines: list[BankLine], usd: Decimal,
+                   date_sent: str | None) -> BankLine | None:
+    """USD debit on the US statement matching the transfer amount."""
+    for line in us_lines:
+        if line.amount_uah >= 0:   # BankLine amounts are signed; USD here
+            continue
+        if abs(abs(line.amount_uah) - usd) <= usd * Decimal("0.005"):
+            if date_sent is None or _within(line.date, date_sent, 5):
+                return line
+    return None
 
 
 def _match_request(requests: list[dict], usd: Decimal) -> dict | None:
