@@ -124,7 +124,11 @@ python -m kvfos dashboard    # regenerates kv-fos/dashboard/dashboard.html
 ```
 
 A single self-contained HTML page in plain language (no CLI/code on the
-page): summary tiles with the TD Bank (US) cash headline, the current
+page): a **Start monthly process** wizard that walks through every
+monthly source (TD Bank, Zeffy, Stripe, PayPal, Ukrainian bank
+statements, bookkeeper's ledger, center statistics, Wise) with
+received/needed status and attach-and-send prompts; summary tiles with
+the TD Bank (US) cash headline, the current
 month's stepper and checklist, month status list, and Ukraine / United
 States entity tabs — exception queue with Accept / Adjust buttons that
 compose a ready-to-send instruction for Claude, missing-information

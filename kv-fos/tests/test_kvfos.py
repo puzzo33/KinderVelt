@@ -151,6 +151,21 @@ def test_us_side_statement_and_trace_link(root):
     assert traces[0]["deposit_confirmed"]          # UA side still verified
 
 
+def test_platform_exports_ingested_and_gap_when_missing(root):
+    close(root)
+    platforms = read_json(root, MONTH, "platforms.json")
+    assert set(platforms) == {"stripe", "zeffy", "paypal"}
+    assert platforms["stripe"]["net"] == 9300.0    # matches TD payouts
+    assert platforms["zeffy"]["fees"] == 0.0
+    assert platforms["paypal"]["count"] == 2
+    # remove one export -> material (not blocking) gap
+    (root / "months" / MONTH / "inputs" / f"paypal_{MONTH}.csv").unlink()
+    s = close(root)
+    assert s["gaps_blocking"] == 0
+    gaps = read_json(root, MONTH, "gaps.json")
+    assert any(g["title"] == "PayPal export missing" for g in gaps)
+
+
 def test_corrupt_document_becomes_gap_not_crash(root):
     wb_path = root / "months" / MONTH / "inputs" / f"workbook_{MONTH}.xlsx"
     wb_path.write_bytes(b"this is not an excel file")

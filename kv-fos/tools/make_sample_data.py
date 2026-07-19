@@ -109,6 +109,19 @@ def build(inputs: Path, month: str = "2026-06") -> None:
                [f"{y_m}-16", "Stripe payout — online donations", "STRIPE", 5100, 45800],
                [f"{y_m}-28", "Monthly service fee", "TD BANK", -25, 45775]])
 
+    # ---- donation platform exports (US) -----------------------------------
+    write_csv(f"stripe_{y_m}.csv",
+         ["Date", "Description", "Gross", "Fee", "Net"],
+         [[f"{y_m}-01", "Payout — online donations May 16–31", 4330, 130, 4200],
+          [f"{y_m}-16", "Payout — online donations Jun 1–15", 5230, 130, 5100]])
+    write_csv(f"zeffy_{y_m}.csv",
+         ["Date", "Description", "Gross", "Fee", "Net"],
+         [[f"{y_m}-08", "Monthly donors batch", 1200, 0, 1200]])
+    write_csv(f"paypal_{y_m}.csv",
+         ["Date", "Description", "Gross", "Fee", "Net"],
+         [[f"{y_m}-12", "Donation — J. Smith", 500, 18, 482],
+          [f"{y_m}-22", "Donation — anonymous", 350, 15, 335]])
+
     # ---- center statistics ------------------------------------------------
     write_csv(f"CenterUpdates_{y_m}.csv",
               ["Center", "ChildrenServed", "Consultations", "Classes",

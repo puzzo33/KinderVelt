@@ -60,6 +60,30 @@
     "notes": ""
   },
   {
+    "doc_id": "eeb621d10440",
+    "file": "paypal_2026-06.csv",
+    "doc_type": "platform_export",
+    "month": "2026-06",
+    "account": "paypal",
+    "sha256": "eeb621d104402d9056e71c3ce06a9d8bb14d1cbddf2da0167256aaec51453a2a",
+    "size": 123,
+    "extraction_confidence": "high",
+    "superseded_by": null,
+    "notes": ""
+  },
+  {
+    "doc_id": "3de2b4fed04a",
+    "file": "stripe_2026-06.csv",
+    "doc_type": "platform_export",
+    "month": "2026-06",
+    "account": "stripe",
+    "sha256": "3de2b4fed04a4f37182ab782182f96cb71d9a84a8a0073728c4f31c7a72682e9",
+    "size": 163,
+    "extraction_confidence": "high",
+    "superseded_by": null,
+    "notes": ""
+  },
+  {
     "doc_id": "199b2c017722",
     "file": "wise_2026-06.csv",
     "doc_type": "wise_transfer",
@@ -72,13 +96,25 @@
     "notes": ""
   },
   {
-    "doc_id": "c096517cecb4",
+    "doc_id": "4465d7b5923a",
     "file": "workbook_2026-06.xlsx",
     "doc_type": "accounting_workbook",
     "month": "2026-06",
     "account": null,
-    "sha256": "c096517cecb47d66fc260bc79178c0bf789c1622953ec773da81d3511aab801b",
-    "size": 7912,
+    "sha256": "4465d7b5923a166706e9f48ebc0a7cde8e8b8e4f7b85e8330117a5494ed8e980",
+    "size": 7911,
+    "extraction_confidence": "high",
+    "superseded_by": null,
+    "notes": ""
+  },
+  {
+    "doc_id": "ead177bab5bd",
+    "file": "zeffy_2026-06.csv",
+    "doc_type": "platform_export",
+    "month": "2026-06",
+    "account": "zeffy",
+    "sha256": "ead177bab5bd2b46b7e84973892e3e1ec76759b067d1e1de200af07a0fd4b052",
+    "size": 77,
     "extraction_confidence": "high",
     "superseded_by": null,
     "notes": ""

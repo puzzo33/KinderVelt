@@ -78,6 +78,21 @@ def close_month(root: Path, month: str, amend: bool = False) -> dict:
     for d in registry.live(docs, DocType.WISE_TRANSFER.value):
         wise_transfers.extend(_read(d, ingest.read_wise, []))
 
+    # donation platform exports (US side): per-platform monthly summary
+    platforms: dict[str, dict] = {}
+    for d in registry.live(docs, DocType.PLATFORM_EXPORT.value):
+        rows = _read(d, ingest.read_platform_export, [])
+        if not rows:
+            continue
+        pid = d.account or "unknown"
+        agg = platforms.setdefault(pid, {"gross": 0, "fees": 0, "net": 0,
+                                         "count": 0, "file": d.file})
+        for r in rows:
+            agg["gross"] = float(agg["gross"]) + float(r.get("gross") or 0)
+            agg["fees"] = float(agg["fees"]) + float(r.get("fee") or 0)
+            agg["net"] = float(agg["net"]) + float(r.get("net") or 0)
+            agg["count"] += 1
+
     funding_requests: list[dict] = []
     for d in registry.live(docs, DocType.FUNDING_REQUEST.value):
         req = _read(d, ingest.read_funding_request, None)
@@ -136,6 +151,7 @@ def close_month(root: Path, month: str, amend: bool = False) -> dict:
     with open(derived / "us_lines.jsonl", "w", encoding="utf-8") as f:
         for l in sorted(us_lines, key=lambda l: (l.account, l.date, l.line_id)):
             f.write(json.dumps(l.as_dict(), ensure_ascii=False) + "\n")
+    _dump(derived / "platforms.json", platforms)
     _dump(derived / "reconciliation.json", reconciliation)
     _dump(derived / "traces.json", traces)
     _dump(derived / "analysis.json", {"financial": fin, "operational": ops})

@@ -128,11 +128,19 @@ def cmd_init_month(root: Path, args) -> int:
         accounts = "\n".join(
             f"- [ ] Bank statement: {a['name']} (`bank_{a['id']}_{month}.csv`)"
             for a in k.accounts if a.get("active"))
+        us_accounts = "\n".join(
+            f"- [ ] US bank statement: {a['name']} (`bank_{a['id']}_{month}.csv`)"
+            for a in k.us_accounts if a.get("active"))
+        platforms = "\n".join(
+            f"- [ ] {p['name']} export (`{p['id']}_{month}.csv`)"
+            for p in k.funding_platforms if p.get("active"))
         checklist.write_text(
             f"# Inputs checklist — {month}\n\n"
             f"Required (SPEC §6.1):\n\n"
-            f"- [ ] Accounting workbook (`workbook_{month}.xlsx`)\n{accounts}\n"
+            f"- [ ] Bookkeeper's ledger / accounting workbook "
+            f"(`workbook_{month}.xlsx`)\n{accounts}\n"
             f"- [ ] Center statistics (`CenterUpdates_{month}.pdf`/`.csv`)\n\n"
+            f"Requested — US side:\n\n{us_accounts}\n{platforms}\n\n"
             f"Optional — add if they exist (SPEC §6.2):\n\n"
             f"- [ ] Wise transfer confirmations (`wise_{month}.csv`)\n"
             f"- [ ] Funding request letters\n- [ ] Invoices / receipts\n",

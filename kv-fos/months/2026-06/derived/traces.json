@@ -67,7 +67,7 @@
         "detail": "booked ₴498000.00 on 2026-06-05",
         "refs": [
           {
-            "doc_id": "c096517cecb4",
+            "doc_id": "4465d7b5923a",
             "file": "workbook_2026-06.xlsx",
             "locator": "sheet=GeneralLedger row=2"
           }

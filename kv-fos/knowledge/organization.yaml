@@ -35,6 +35,20 @@ us_accounts:
     currency: USD
     active: true
 
+# US donation platforms. A monthly export is requested from each active
+# platform (material gap when absent): they evidence donation income and
+# let payouts be cross-checked against the US bank statement.
+funding_platforms:
+  - id: zeffy
+    name: "Zeffy"
+    active: true
+  - id: stripe
+    name: "Stripe"
+    active: true
+  - id: paypal
+    name: "PayPal"
+    active: true
+
 # Bank/cash accounts of the Ukrainian entity. Every active account must be
 # covered by a bank statement each month or a gap is raised (SPEC §6.1).
 accounts:

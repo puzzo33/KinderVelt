@@ -30,10 +30,14 @@ UNIQUE_KEYS = {
     DocType.ACCOUNTING_WORKBOOK.value: lambda d: "workbook",
     DocType.CENTER_STATS.value: lambda d: "stats",
     DocType.BANK_STATEMENT.value: lambda d: f"bank:{d.account or 'unknown'}",
+    DocType.PLATFORM_EXPORT.value: lambda d: f"platform:{d.account or 'unknown'}",
 }
+
+_PLATFORM_RE = re.compile(r"(zeffy|stripe|paypal)", re.I)
 
 _FILENAME_HINTS = [
     (re.compile(r"wise", re.I), DocType.WISE_TRANSFER),
+    (_PLATFORM_RE, DocType.PLATFORM_EXPORT),
     (re.compile(r"(bank|statement|виписк)", re.I), DocType.BANK_STATEMENT),
     (re.compile(r"(centerupdate|stats|statistic|metrics)", re.I), DocType.CENTER_STATS),
     (re.compile(r"(funding.?request|request.?letter)", re.I), DocType.FUNDING_REQUEST),
@@ -65,6 +69,8 @@ def detect_type(path: Path, manifest: dict) -> tuple[str, str | None]:
         account = m.group(1)
     for rx, dtype in _FILENAME_HINTS:
         if rx.search(name):
+            if dtype is DocType.PLATFORM_EXPORT:
+                account = _PLATFORM_RE.search(name).group(1).lower()
             return dtype.value, account
     if path.suffix.lower() in (".xlsx", ".xlsm"):
         # an Excel file with ledger-like sheets is the workbook

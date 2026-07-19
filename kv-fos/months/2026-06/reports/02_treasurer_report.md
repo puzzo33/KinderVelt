@@ -1,6 +1,6 @@
 # Treasurer Report — 2026-06
 
-*Friends of Kinder Velt USA, Inc. — Financial Oversight System. Generated 2026-07-18 23:59 UTC.*
+*Friends of Kinder Velt USA, Inc. — Financial Oversight System. Generated 2026-07-19 00:15 UTC.*
 
 ## Confidence: 100/100 — LOW
 
@@ -16,45 +16,45 @@
 
 ## Exceptions — 5 open
 
-### [MEDIUM] Large expense $4312.41 — Заробітна плата
-
-Single expense of ₴180000.00 (~$4312.41) exceeds the $500 materiality threshold.
-
-- source: `workbook_2026-06.xlsx` sheet=GeneralLedger row=5 (doc c096517cecb4)
-- transactions: T19e0d9446557
-- finding id: `X0ccded6bc48d`
-
 ### [MEDIUM] Large expense $1247.00 — ФОП Юриев
 
 Single expense of ₴52000.00 (~$1247.00) exceeds the $500 materiality threshold.
 
-- source: `workbook_2026-06.xlsx` sheet=GeneralLedger row=3 (doc c096517cecb4)
-- transactions: Te962ff59fc83
-- finding id: `X41f98670d764`
-
-### [MEDIUM] Large expense $948.73 — ДПС України
-
-Single expense of ₴39600.00 (~$948.73) exceeds the $500 materiality threshold.
-
-- source: `workbook_2026-06.xlsx` sheet=GeneralLedger row=6 (doc c096517cecb4)
-- transactions: T631324924856
-- finding id: `Xb0e249b09578`
+- source: `workbook_2026-06.xlsx` sheet=GeneralLedger row=3 (doc 4465d7b5923a)
+- transactions: T67d5e9be1e24
+- finding id: `X52278aa2f314`
 
 ### [MEDIUM] Large expense $514.35 — ТОВ Арт-Плюс
 
 Single expense of ₴21500.00 (~$514.35) exceeds the $500 materiality threshold.
 
-- source: `workbook_2026-06.xlsx` sheet=GeneralLedger row=8 (doc c096517cecb4)
-- transactions: Td693f11f67c4
-- finding id: `Xfaa24eeb79e0`
+- source: `workbook_2026-06.xlsx` sheet=GeneralLedger row=8 (doc 4465d7b5923a)
+- transactions: T66b53434c6de
+- finding id: `Xa05f9702ed07`
+
+### [MEDIUM] Large expense $4312.41 — Заробітна плата
+
+Single expense of ₴180000.00 (~$4312.41) exceeds the $500 materiality threshold.
+
+- source: `workbook_2026-06.xlsx` sheet=GeneralLedger row=5 (doc 4465d7b5923a)
+- transactions: Tf4d3b2c743d9
+- finding id: `Xcb21ef2bfc7c`
+
+### [MEDIUM] Large expense $948.73 — ДПС України
+
+Single expense of ₴39600.00 (~$948.73) exceeds the $500 materiality threshold.
+
+- source: `workbook_2026-06.xlsx` sheet=GeneralLedger row=6 (doc 4465d7b5923a)
+- transactions: T99288cbe9463
+- finding id: `Xe641e7af18c9`
 
 ### [MEDIUM] New vendor: ТОВ Арт-Плюс
 
 Counterparty “ТОВ Арт-Плюс” is not in the vendor master or learned aliases. Confirm who this is; confirming adds an alias so it is never asked again.
 
-- source: `workbook_2026-06.xlsx` sheet=GeneralLedger row=8 (doc c096517cecb4)
-- transactions: Td693f11f67c4
-- finding id: `X114075cf90c0`
+- source: `workbook_2026-06.xlsx` sheet=GeneralLedger row=8 (doc 4465d7b5923a)
+- transactions: T66b53434c6de
+- finding id: `X0403d9b0c4fa`
 
 
 ## Reconciliation

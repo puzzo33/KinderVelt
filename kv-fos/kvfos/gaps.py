@@ -53,6 +53,17 @@ def detect_gaps(k: Knowledge, month: str, docs: list[Document],
             "are never computed from partial data.",
             "Request the missing centers' figures and replace the stats file.")
 
+    platform_covered = {d.account for d in
+                        live(docs, DocType.PLATFORM_EXPORT.value)}
+    for p in k.active_platforms():
+        if p["id"] not in platform_covered:
+            gap("material", "missing_input",
+                f"{p['name']} export missing",
+                f"The monthly {p['name']} export evidences donation income "
+                "and lets payouts be checked against the US bank statement.",
+                f"Add {p['id']}_{month}.csv (Date, Description, Gross, Fee, "
+                f"Net) to months/{month}/inputs/ and re-run.")
+
     covered = {d.account for d in live(docs, DocType.BANK_STATEMENT.value)}
     for acc in k.active_us_accounts():
         if acc["id"] not in covered:

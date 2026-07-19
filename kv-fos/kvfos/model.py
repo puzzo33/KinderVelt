@@ -45,6 +45,7 @@ class DocType(str, Enum):
     BANK_STATEMENT = "bank_statement"
     CENTER_STATS = "center_stats"
     WISE_TRANSFER = "wise_transfer"
+    PLATFORM_EXPORT = "platform_export"   # Zeffy / Stripe / PayPal
     FUNDING_REQUEST = "funding_request"
     INVOICE = "invoice"
     SUPPORTING = "supporting"

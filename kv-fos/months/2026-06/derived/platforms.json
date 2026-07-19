@@ -1,0 +1,23 @@
+{
+  "paypal": {
+    "gross": 850.0,
+    "fees": 33.0,
+    "net": 817.0,
+    "count": 2,
+    "file": "paypal_2026-06.csv"
+  },
+  "stripe": {
+    "gross": 9560.0,
+    "fees": 260.0,
+    "net": 9300.0,
+    "count": 2,
+    "file": "stripe_2026-06.csv"
+  },
+  "zeffy": {
+    "gross": 1200.0,
+    "fees": 0.0,
+    "net": 1200.0,
+    "count": 1,
+    "file": "zeffy_2026-06.csv"
+  }
+}

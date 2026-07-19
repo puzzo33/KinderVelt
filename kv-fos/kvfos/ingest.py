@@ -32,15 +32,18 @@ _HEADER_SYNONYMS = {
     "balance": {"balance", "залишок"},
     "employee": {"employee", "піб", "працівник"},
     "role": {"role", "посада"},
-    "gross_uah": {"grossuah", "gross", "нараховано"},
+    "gross_uah": {"grossuah", "нараховано"},
     "taxes_uah": {"taxesuah", "taxes", "податки"},
-    "net_uah": {"netuah", "net", "до виплати"},
+    "net_uah": {"netuah", "до виплати"},
     "opening_uah": {"openinguah", "opening", "залишок на початок"},
     "closing_uah": {"closinguah", "closing", "залишок на кінець"},
     "children_served": {"childrenserved", "children", "діти"},
     "consultations": {"consultations", "консультації"},
     "classes": {"classes", "заняття"},
     "new_children": {"newchildren", "нові діти"},
+    "gross": {"gross", "gross amount"},
+    "fee": {"fee", "fees", "processing fee"},
+    "net": {"net", "net amount"},
     "transfer_id": {"transferid", "id"},
     "date_sent": {"datesent", "sent"},
     "amount_usd": {"amountusd", "usd"},
@@ -245,6 +248,25 @@ def read_center_stats(path: Path, doc: Document) -> list[dict]:
         for k in ("children_served", "consultations", "classes", "new_children"):
             if k in rec and rec[k] is not None and str(rec[k]).strip() != "":
                 rec[k] = int(float(str(rec[k])))
+        out.append(rec)
+    return out
+
+
+# ---------------------------------------------------------------------------
+# Donation platform exports (Zeffy / Stripe / PayPal) — USD
+
+def read_platform_export(path: Path, doc: Document) -> list[dict]:
+    if path.suffix.lower() != ".csv":
+        raise IngestError(f"{doc.file}: platform exports must be CSV")
+    out = []
+    for rec in _parse_table(_rows_from_csv(path), {"date", "gross"},
+                            doc, "table"):
+        rec["date"] = _iso(rec["date"])
+        for k in ("gross", "fee", "net"):
+            if k in rec:
+                rec[k] = _num(rec[k])
+        if rec.get("net") is None and rec.get("gross") is not None:
+            rec["net"] = rec["gross"] - (rec.get("fee") or 0)
         out.append(rec)
     return out
 

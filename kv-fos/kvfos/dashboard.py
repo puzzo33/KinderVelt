@@ -68,6 +68,7 @@ def gather(root: Path, today: date | None = None) -> dict:
             "reconciliation": _j(d / "reconciliation.json"),
             "traces": _j(d / "traces.json") or [],
             "us_lines": _jsonl(d / "us_lines.jsonl"),
+            "platforms": _j(d / "platforms.json") or {},
         })
     try:
         commit = subprocess.run(["git", "rev-parse", "--short", "HEAD"],
@@ -193,6 +194,136 @@ def _next_action_btn(status: str, m: str) -> str:
 # ---------------------------------------------------------------------------
 # panels
 
+# ---------------------------------------------------------------------------
+# "Start monthly process" wizard — prompts for every monthly source
+
+def _month_sources(k: Knowledge, m: str) -> list[dict]:
+    """Every document source the monthly process needs, with received
+    state detected from the month's inputs folder."""
+    inputs_dir = k.root / "months" / m / "inputs"
+    names = ([p.name.lower() for p in inputs_dir.iterdir()]
+             if inputs_dir.exists() else [])
+
+    def have(*kws):
+        return any(any(kw in n for kw in kws) for n in names)
+
+    src = []
+    for a in k.active_us_accounts():
+        src.append({"group": "United States", "name": f"{a['name']} statement",
+                    "hint": "monthly bank statement (CSV or PDF)",
+                    "have": have(a["id"], a["id"].split("_")[0])})
+    for p in k.active_platforms():
+        src.append({"group": "United States", "name": f"{p['name']} export",
+                    "hint": "monthly transactions/payout export (CSV)",
+                    "have": have(p["id"])})
+    src.append({"group": "Ukraine", "name": "Bookkeeper's ledger",
+                "hint": "the accountant's monthly workbook (Excel)",
+                "have": have("workbook", "ledger", "облік")})
+    for a in k.active_accounts():
+        src.append({"group": "Ukraine", "name": f"{a['name']} statement",
+                    "hint": "monthly bank statement (CSV, Excel or PDF)",
+                    "have": have(a["id"], a["id"].split("_")[0])})
+    src.append({"group": "Ukraine", "name": "Center statistics",
+                "hint": "children served, consultations, classes by center",
+                "have": have("centerupdate", "stats", "statistic")})
+    src.append({"group": "Ukraine", "name": "Wise transfer confirmations",
+                "hint": "optional — improves transfer tracing",
+                "have": have("wise"), "optional": True})
+    return src
+
+
+def _wizard(data: dict, focus: dict | None) -> str:
+    k: Knowledge = data["k"]
+    if focus and focus["status"] in ("awaiting_inputs", "inputs_ready",
+                                     "stale_inputs_changed"):
+        m = focus["month"]
+    else:
+        m = data["current_period"]
+    name = month_name(m)
+    sources = _month_sources(k, m)
+    missing = [s for s in sources if not s["have"] and not s.get("optional")]
+    groups: dict[str, list[dict]] = {}
+    for s in sources:
+        groups.setdefault(s["group"], []).append(s)
+
+    rows = []
+    for group, items in groups.items():
+        rows.append(f'<h4>{E(group)}</h4>')
+        for s in items:
+            if s["have"]:
+                state = '<span class="chip chip-good">✓ Received</span>'
+                btn = ""
+            else:
+                state = ('<span class="chip chip-neutral">○ Optional</span>'
+                         if s.get("optional") else
+                         '<span class="chip chip-warning">Needed</span>')
+                btn = _compose_btn(
+                    "Attach & send", f"{s['name']} — {name}",
+                    f"Monthly process for {name}: attached is the "
+                    f"{s['name']} for {name}. Please add it to the month "
+                    f"and process once everything needed is in.")
+            rows.append(f'<div class="wrow"><div class="wrow-t">'
+                        f'<b>{E(s["name"])}</b>'
+                        f'<span>{E(s["hint"])}</span></div>{state}{btn}</div>')
+
+    if missing:
+        bullet = "".join(f"\n• {s['name']}" for s in missing)
+        send_all = _compose_btn(
+            f"Send everything at once ({len(missing)} items)",
+            f"Monthly documents — {name}",
+            f"I'm starting the monthly process for {name}. Attached are:"
+            f"{bullet}\nPlease add them to the month, process it, and "
+            f"update the console.", primary=True)
+        status = (f'<p class="hint">{len(missing)} of '
+                  f'{len([s for s in sources if not s.get("optional")])} '
+                  f'required items still needed.</p>')
+    else:
+        send_all = _compose_btn(
+            "Everything is in — process the month", f"Process {name}",
+            f"All monthly documents for {name} are in. Please process the "
+            f"month and update the console.", primary=True, attach=False)
+        status = '<p class="hint">✓ Every required item has been received.</p>'
+
+    return (f'<dialog id="wizard"><form method="dialog" class="composer wiz">'
+            f'<h3>Monthly process — {E(name)}</h3>{status}'
+            f'<div class="wlist">{"".join(rows)}</div>'
+            f'<div class="btnrow">{send_all}'
+            f'<button class="btn">Close</button></div></form></dialog>')
+
+
+def _platforms_panel(k: Knowledge, latest: dict | None) -> str:
+    if not latest:
+        return ""
+    name = month_name(latest["month"])
+    platforms = latest["platforms"]
+    labels = {p["id"]: p["name"] for p in k.funding_platforms}
+    fxr = _month_fx(k, latest["month"])
+
+    def p(v):
+        v = Decimal(str(v))
+        return pair(v, v * fxr if fxr else None)
+
+    rows, tg, tn = [], Decimal("0"), Decimal("0")
+    for pid, agg in sorted(platforms.items()):
+        tg += Decimal(str(agg["gross"]))
+        tn += Decimal(str(agg["net"]))
+        rows.append(f'<div class="arow"><span>{E(labels.get(pid, pid))} · '
+                    f'{agg["count"]} donation{"s" if agg["count"] != 1 else ""}'
+                    f'</span>{p(agg["net"])}<span class="tile-s">of '
+                    f'{_usd_s(agg["gross"])} given</span></div>')
+    for pl in k.active_platforms():
+        if pl["id"] not in platforms:
+            rows.append(f'<div class="arow"><span>{E(pl["name"])}</span>'
+                        f'<span class="chip chip-warning">Export needed</span>'
+                        f'<span></span></div>')
+    if platforms:
+        rows.append(f'<div class="arow total"><span>Total received</span>'
+                    f'{p(tn)}<span class="tile-s">after '
+                    f'{_usd_s(tg - tn)} in fees</span></div>')
+    return _card("Donations by platform",
+                 f"{name} — what came in through each channel", "".join(rows))
+
+
 def _masthead(data: dict) -> str:
     stamp = f'Data as of {E(data["generated"])}'
     if data["commit"]:
@@ -202,6 +333,8 @@ def _masthead(data: dict) -> str:
         "Please refresh the Treasurer Console with the latest data and "
         "republish it. I'm attaching any new documents to this message.",
         attach=True)
+    wizard_btn = ('<button class="btn primary" data-wizard>'
+                  'Start monthly process</button>')
     return (
         '<header class="mast"><div class="mast-brand">'
         '<span class="mast-mark">KV</span>'
@@ -211,7 +344,7 @@ def _masthead(data: dict) -> str:
         '<span class="curswitch" role="group" aria-label="Currency">'
         '<button class="cur-btn active" data-cur="usd">$ USD</button>'
         '<button class="cur-btn" data-cur="uah">₴ UAH</button></span>'
-        f'{refresh}</span></div>'
+        f'{wizard_btn}{refresh}</span></div>'
         '<h1>Treasurer Console</h1>'
         f'<p class="mast-stamp">{stamp}</p></header>')
 
@@ -323,10 +456,16 @@ def _now_panel(data: dict, focus: dict | None) -> str:
     gaps_html = "".join(
         f'<div class="gap critical"><b>{E(g["title"])}</b>'
         f'<p>{E(g["detail"])}</p></div>' for g in blocking)
+    wizard_btn = ""
+    if focus["status"] in ("awaiting_inputs", "inputs_ready",
+                           "stale_inputs_changed"):
+        wizard_btn = ('<button class="btn primary" data-wizard>'
+                      'Start monthly process</button>')
     body = (f'<ol class="stepper">{stepper}</ol>{checklist}{gaps_html}'
             f'<p class="next"><span class="eyebrow">Next</span> '
             f'{E(NEXT_HUMAN[focus["status"]])}</p>'
-            f'<div class="btnrow">{_next_action_btn(focus["status"], m)}'
+            f'<div class="btnrow">{wizard_btn}'
+            f'{_next_action_btn(focus["status"], m) if not wizard_btn else ""}'
             + _compose_btn("Something else…", f"About {month_name(m)}",
                            f"About {month_name(m)}: ") + "</div>")
     return _card("Now", f"{month_name(m)} — what needs the Treasurer", body)
@@ -700,7 +839,8 @@ def render(data: dict) -> str:
                  _split_bar(k, latest)) if latest else "")
         + (_card("Impact", f"{month_name(latest['month'])} — what the "
                  "spending achieved", _impact(k, latest)) if latest else ""))
-    us_tab = _us_panel(data, latest) + _traces_panel(latest)
+    us_tab = (_us_panel(data, latest) + _platforms_panel(k, latest)
+              + _traces_panel(latest))
 
     body = (
         _masthead(data)
@@ -717,7 +857,7 @@ def render(data: dict) -> str:
     return ("<title>KV Treasurer Console</title>\n"
             f"<style>{_CSS}</style>\n"
             f'<main class="wrap">{body}</main>\n'
-            f"{_COMPOSER}\n"
+            f"{_COMPOSER}\n{_wizard(data, focus)}\n"
             f"<div id='tip' role='tooltip'></div>\n"
             f"<script>{_JS}</script>")
 
@@ -934,6 +1074,16 @@ dialog::backdrop{background:rgba(14,20,32,.45)}
 background:var(--surface-2);color:var(--ink);padding:10px;font:inherit;
 font-size:14px;resize:vertical}
 .composer .hint{margin:0;font-size:12.5px;color:var(--ink-3)}
+.wiz{max-height:80vh;overflow-y:auto}
+.wlist h4{margin:10px 0 2px;font-size:11px;font-weight:800;
+letter-spacing:.07em;text-transform:uppercase;color:var(--ink-3)}
+.wrow{display:flex;align-items:center;gap:10px;padding:8px 0;
+border-bottom:1px solid var(--line);flex-wrap:wrap}
+.wrow:last-child{border-bottom:0}
+.wrow-t{flex:1;min-width:150px;display:flex;flex-direction:column}
+.wrow-t b{font-size:13.5px}
+.wrow-t span{font-size:12px;color:var(--ink-3)}
+.wrow .btn{padding:5px 10px;font-size:12px}
 #tip{position:fixed;z-index:10;background:var(--tip-bg);color:var(--tip-ink);
 font-size:12px;font-weight:600;padding:5px 9px;border-radius:5px;
 pointer-events:none;opacity:0;transition:opacity .1s;max-width:300px}
@@ -960,6 +1110,8 @@ document.addEventListener('click',function(e){
     document.querySelectorAll('.tabpane').forEach(function(p){
       p.classList.toggle('active',p.getAttribute('data-pane')===t);});
     return;}
+  var wz=e.target.closest('[data-wizard]');
+  if(wz){document.getElementById('wizard').showModal();return;}
   var b=e.target.closest('[data-compose]');
   if(b){var d=document.getElementById('composer');
     document.getElementById('c-title').textContent=b.getAttribute('data-ctitle');
