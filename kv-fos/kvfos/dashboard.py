@@ -1490,7 +1490,7 @@ function actCheckLatest(){
   openConfirm('Check for updates','Fetches the latest processed results '+
     'from the oversight records and reloads this console if newer data '+
     'is available.','Check now',function(){
-      return getRaw(BOOT.root+'/dashboard/dashboard.html').then(function(t){
+      return getRaw(BOOT.root+'/dashboard/console.html').then(function(t){
         var i=t.indexOf('<title>');
         if(i<0)throw {code:'tool_error',message:'latest console unreadable'};
         var html=t.slice(i);
@@ -1570,7 +1570,7 @@ applyCur();
 
 def generate(root: Path, out: Path | None = None) -> Path:
     data = gather(Path(root))
-    out = out or Path(root) / "dashboard" / "dashboard.html"
+    out = out or Path(root) / "dashboard" / "console.html"
     out.parent.mkdir(parents=True, exist_ok=True)
     out.write_text(render(data), encoding="utf-8")
     return out
