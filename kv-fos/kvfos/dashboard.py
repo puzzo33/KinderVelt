@@ -1200,7 +1200,7 @@ _JS = r"""
 (function(){
 'use strict';
 var BOOT=JSON.parse(document.getElementById('kvfos-boot').textContent);
-var GH=BOOT.gh, SERVER='GitHub';
+var GH=BOOT.gh, SERVER='GitHub MCP';
 var TEXT_EXT=['csv','txt','md','yaml','yml','json'];
 
 // ---- currency toggle -------------------------------------------------------
@@ -1233,7 +1233,13 @@ var FIX={
 function errText(e,isWrite){
   var code=e&&e.code||'upstream_error';
   if(FIX[code])return FIX[code];
-  if(code==='tool_error')return 'GitHub reported: '+(e.message||'a problem');
+  if(code==='tool_error'){
+    if(/not accessible by integration|403/i.test(e.message||''))
+      return 'Your GitHub connection can read but not write this '+
+        'repository. On github.com: Settings \u2192 Applications \u2192 '+
+        'find \u201cGitHub MCP Server\u201d \u2192 grant it read-and-write '+
+        'access to puzzo33/KinderVelt, then try again.';
+    return 'GitHub reported: '+(e.message||'a problem');}
   if(code==='server_unavailable'||code==='upstream_error')
     return isWrite?
       'GitHub didn’t confirm — it may still have gone through. Use '+
