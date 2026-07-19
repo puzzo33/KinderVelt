@@ -1281,22 +1281,43 @@ function ts(){return new Date().toISOString().replace(/[:.]/g,'-').slice(0,19);}
 function yamlStr(s){return '"'+String(s).replace(/\\/g,'\\\\')
   .replace(/"/g,'\\"').replace(/\n/g,' ')+'"';}
 
-// probe the connection once, to annotate the masthead early
-if(mcpReady()){
-  window.claude.mcp.listTools().then(function(res){
-    var gh=(res.servers||[]).filter(function(s){return s.server===SERVER})[0];
-    var note=document.getElementById('conn-note');
-    if(!gh||!gh.tools||!gh.tools.length){
-      note.textContent=FIX.server_not_connected;
-    }else if(gh.authStatus==='needs_reauth'){
-      note.textContent=FIX.needs_reauth;
-    }
-  }).catch(function(){/* call-time codes will explain */});
-}else{
+// connection probe — diagnoses the exact state so the fix is never a guess
+function connProbe(){
   var note=document.getElementById('conn-note');
-  if(note)note.textContent='To act directly from this portal, open it on '+
-    'claude.ai with the GitHub connector added (Settings → Connectors).';
+  if(!note)return;
+  if(!mcpReady()){
+    note.textContent='Direct actions need this page opened on claude.ai — '+
+      'connector access is not available in this view.';
+    return;}
+  window.claude.mcp.listTools().then(function(res){
+    var servers=res.servers||[];
+    var gh=servers.filter(function(s){return s.server===SERVER})[0];
+    if(gh&&gh.tools&&gh.tools.length){
+      note.textContent=(gh.authStatus==='needs_reauth')?FIX.needs_reauth:'';
+      return;}
+    var names=servers.map(function(s){return s.server});
+    if(gh){
+      note.textContent='GitHub is connected but not ready for this page — '+
+        'if claude.ai asks you to choose or allow a connection, do so, '+
+        'then reload. Otherwise reconnect GitHub in Settings → Connectors.';
+    }else if(names.length){
+      note.textContent='Connections this page can see: '+names.join(', ')+
+        ' — “GitHub” is not among them. If your GitHub connection has a '+
+        'different name, tell Claude what it is called and the console '+
+        'will be re-wired. Otherwise add GitHub in claude.ai Settings → '+
+        'Connectors, then reload.';
+    }else{
+      note.textContent='No connections are visible to this page yet. Two '+
+        'things must both be true: the GitHub connector is added in '+
+        'claude.ai Settings → Connectors, AND you allowed this page to '+
+        'use your connectors when claude.ai asked (reload the page to be '+
+        'asked again).';
+    }
+  }).catch(function(e){
+    note.textContent='Connection check: '+errText(e,false);
+  });
 }
+connProbe();
 
 // ---- status helpers ---------------------------------------------------------
 function setStatus(id,cls,msg){var el=document.getElementById(id);
