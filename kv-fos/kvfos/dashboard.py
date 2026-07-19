@@ -1273,13 +1273,18 @@ function fileSha(path){
     var m=t.match(/SHA:\s*([0-9a-f]{40})/i);
     return m?m[1]:null;});
 }
-// create; if the file already exists, fetch its sha and update instead
+// create; only when the failure says the file already exists, fetch its
+// sha and update instead — and never let the retry's own failure mask
+// the original error (e.g. a 403 write refusal must surface as itself)
 function putFile(path,content,message){
   return commitFile(path,content,message).catch(function(e){
-    if(e&&e.code==='tool_error'){
+    var msg=(e&&e.message)||'';
+    if(e&&e.code==='tool_error'&&/sha|already exists|422/i.test(msg)&&
+       !/not accessible|403/i.test(msg)){
       return fileSha(path).then(function(sha){
         if(!sha)throw e;
-        return commitFile(path,content,message,sha);});
+        return commitFile(path,content,message,sha);
+      },function(){throw e;});
     }
     throw e;});
 }
