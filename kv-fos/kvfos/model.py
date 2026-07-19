@@ -155,6 +155,7 @@ class Finding:
     explanation: str             # plain-language why it was flagged
     evidence: list[dict] = field(default_factory=list)
     txn_ids: list[str] = field(default_factory=list)
+    vendor: str | None = None    # vendor_id when the finding is vendor-scoped
     status: str = "open"         # open | auto_explained | accepted | escalated
     resolution: str | None = None
 

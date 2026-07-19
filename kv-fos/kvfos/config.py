@@ -177,6 +177,31 @@ def load_knowledge(root: Path) -> Knowledge:
     cats = _load_yaml(kdir / "categories.yaml")
     vendors_raw = _load_yaml(kdir / "vendors.yaml").get("vendors", [])
     learned_dir = kdir / "learned"
+    # portal-written knowledge: one small file per Treasurer decision made
+    # in the Treasurer Console (create-only commits — no merge conflicts).
+    portal_resolutions: list[dict] = []
+    portal_aliases: list[dict] = []
+    portal_vendors: list[dict] = []
+    portal_dir = learned_dir / "portal"
+    if portal_dir.exists():
+        for pf in sorted(portal_dir.glob("*.yaml")):
+            entry = _load_yaml(pf)
+            kind = entry.pop("kind", None)
+            if kind == "resolution":
+                portal_resolutions.append(entry)
+            elif kind == "alias":
+                portal_aliases.append(entry)
+            elif kind == "new_vendor":
+                name = entry.get("name", pf.stem)
+                portal_vendors.append({
+                    "id": entry.get("id") or re.sub(
+                        r"[^a-z0-9]+", "_", name.casefold()).strip("_"),
+                    "name": name,
+                    "translit": entry.get("translit", ""),
+                    "aliases": entry.get("aliases", []),
+                    "category": entry.get("category"),
+                    "classification": entry.get("classification"),
+                })
     k = Knowledge(
         root=Path(root),
         organization=org.get("organization", {}),
@@ -187,13 +212,16 @@ def load_knowledge(root: Path) -> Knowledge:
         groups=cats.get("groups", {}),
         income_categories=cats.get("income_categories", {}),
         account_map=cats.get("account_map", {}),
-        vendors=[Vendor(**v) for v in vendors_raw],
+        vendors=[Vendor(**v) for v in vendors_raw]
+                + [Vendor(**v) for v in portal_vendors],
         materiality=_load_yaml(kdir / "materiality.yaml"),
         funding_sources=_load_yaml(kdir / "funding_sources.yaml").get("funding_sources", []),
         fx=_load_yaml(kdir / "fx_rates.yaml"),
         confidence=_load_yaml(kdir / "confidence.yaml"),
-        learned_aliases=_load_yaml(learned_dir / "vendor_aliases.yaml").get("aliases", []) or [],
-        learned_resolutions=_load_yaml(learned_dir / "resolutions.yaml").get("resolutions", []) or [],
+        learned_aliases=(_load_yaml(learned_dir / "vendor_aliases.yaml")
+                         .get("aliases", []) or []) + portal_aliases,
+        learned_resolutions=(_load_yaml(learned_dir / "resolutions.yaml")
+                             .get("resolutions", []) or []) + portal_resolutions,
     )
     _validate(k)
     return k

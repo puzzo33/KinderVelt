@@ -99,9 +99,24 @@ def scan_inputs(month_dir: Path, month: str) -> list[Document]:
     docs: list[Document] = []
     if not inputs.exists():
         return docs
+
+    # portal uploads of binary files travel as base64 text (<name>.b64);
+    # materialize the real file before scanning so it behaves normally
+    import base64
+    for b64_path in inputs.rglob("*.b64"):
+        target = b64_path.with_suffix("")
+        try:
+            decoded = base64.b64decode(b64_path.read_text(), validate=True)
+        except Exception:
+            continue
+        if not target.exists() or target.read_bytes() != decoded:
+            target.write_bytes(decoded)
+
     for path in sorted(inputs.rglob("*")):
-        if not path.is_file() or path.name in ("manifest.yaml", ".gitkeep",
-                                               "CHECKLIST.md"):
+        if (not path.is_file()
+                or path.name.startswith(".")       # portal markers, .gitkeep
+                or path.suffix == ".b64"
+                or path.name in ("manifest.yaml", "CHECKLIST.md")):
             continue
         dtype, account = detect_type(path, manifest)
         sha = sha256_file(path)

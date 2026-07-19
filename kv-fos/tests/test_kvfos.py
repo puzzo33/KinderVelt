@@ -166,6 +166,49 @@ def test_platform_exports_ingested_and_gap_when_missing(root):
     assert any(g["title"] == "PayPal export missing" for g in gaps)
 
 
+def test_portal_written_knowledge_is_loaded(root):
+    portal = root / "knowledge" / "learned" / "portal"
+    portal.mkdir(parents=True)
+    # portal accept: vendor-scoped resolution (one file per decision)
+    (portal / "accept-Xabc.yaml").write_text(
+        'kind: resolution\nrule: large_one_time_expense\nvendor: kv_payroll\n'
+        'explanation: "Monthly payroll run — expected size."\n'
+        'accepted: "2026-07-19"\nby: treasurer-portal\n', encoding="utf-8")
+    # portal vendor confirmation
+    (portal / "vendor-Xdef.yaml").write_text(
+        'kind: new_vendor\nname: "ТОВ Арт-Плюс"\ncategory: therapy_materials\n'
+        'classification: program\nconfirmed: "2026-07-19"\n'
+        'by: treasurer-portal\n', encoding="utf-8")
+    s = close(root)
+    assert s["auto_explained"] >= 1
+    rules = findings_by_rule(root)
+    assert "new_vendor" not in rules          # Арт-Плюс is now known
+    # vendor scoping: only the payroll finding is auto-explained
+    payroll = [f for f in read_json(root, MONTH, "exceptions.json")
+               if f["rule"] == "large_one_time_expense"]
+    assert any(f["status"] == "auto_explained" and f["vendor"] == "kv_payroll"
+               for f in payroll)
+    assert any(f["status"] == "open" and f["vendor"] == "fop_yuriev"
+               for f in payroll)
+
+
+def test_b64_portal_upload_is_materialized(root):
+    import base64
+    inputs = root / "months" / MONTH / "inputs"
+    wb = inputs / f"workbook_{MONTH}.xlsx"
+    raw = wb.read_bytes()
+    wb.unlink()
+    # portal uploads binaries as base64 text; the pipeline decodes them
+    (inputs / f"workbook_{MONTH}.xlsx.b64").write_text(
+        base64.b64encode(raw).decode(), encoding="utf-8")
+    s = close(root)
+    assert s["fully_reconciled"]
+    assert s["transactions"] == 9
+    docs = read_json(root, MONTH, "documents.json")
+    assert any(d["file"] == f"workbook_{MONTH}.xlsx" for d in docs)
+    assert not any(d["file"].endswith(".b64") for d in docs)
+
+
 def test_corrupt_document_becomes_gap_not_crash(root):
     wb_path = root / "months" / MONTH / "inputs" / f"workbook_{MONTH}.xlsx"
     wb_path.write_bytes(b"this is not an excel file")

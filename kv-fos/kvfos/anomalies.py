@@ -31,7 +31,7 @@ def detect(k: Knowledge, month: str, txns: list[Transaction],
             finding_id=make_finding_id(month, rule, key),
             month=month, rule=rule, severity=severity, title=title,
             explanation=explanation, evidence=list(evidence),
-            txn_ids=list(txn_ids),
+            txn_ids=list(txn_ids), vendor=vendor,
         )
         res = k.find_resolution(rule, vendor=vendor, month_of_year=month_of_year,
                                 account=account, category=category)

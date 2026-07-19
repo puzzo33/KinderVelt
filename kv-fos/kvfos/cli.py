@@ -35,8 +35,8 @@ def month_status(root: Path, month: str) -> str:
     inputs = month_dir / "inputs"
     has_inputs = inputs.exists() and any(
         p for p in inputs.rglob("*")
-        if p.is_file() and p.name not in (".gitkeep", "manifest.yaml",
-                                          "CHECKLIST.md"))
+        if p.is_file() and not p.name.startswith(".")
+        and p.name not in ("manifest.yaml", "CHECKLIST.md"))
     derived_docs = month_dir / "derived" / "documents.json"
     if lock_mod.is_locked(month_dir):
         return "approved"
